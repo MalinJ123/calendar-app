@@ -31,7 +31,7 @@ header.append(headerButtonLeft, headerH1, headerButtonRight)
 
 // Händelser
 function amountOfEvent() {
-	const events = document.createElement('div') 
+	const events = document.createElement('label') 
 events.setAttribute('class', 'events')
 
 const eventHeading = document.createElement('h3')
