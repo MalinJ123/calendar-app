@@ -58,3 +58,20 @@ body{
     height: 5vh;
     padding-left: 1em;
 }
+
+/* tablet */
+@media (min-width:481px) and (max-width:768px){
+    
+}
+
+
+/* laptop, small screens */
+
+@media (min-width:769px) and (max-width:1024px){
+    
+}
+
+/* desktop, larger screens */
+@media (min-width:1025px){
+
+}
