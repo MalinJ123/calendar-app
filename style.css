@@ -3,6 +3,8 @@
 :root{
 	--offwhite:#F5F5F5;
 	--darkgrey:#383838;
+    
+
 }
 
 *{
@@ -15,7 +17,10 @@
 body{
     background-color: var(--offwhite);
     width: 100vw;
-    height: 100vh;    
+    height: 100vh; 
+    display:flex;
+    flex-direction: column;
+    align-items: center;   
 }
 .main {
     width: 100vw;
@@ -52,7 +57,7 @@ body{
 }
 
 .main__events {
-    border:2px solid black;
+    border:2px solid var(--darkgrey);
     margin-top: 2em;
     width: 100vw;
     height: 5vh;
@@ -61,17 +66,53 @@ body{
 
 /* tablet */
 @media (min-width:481px) and (max-width:768px){
-    
+    .main {
+        width: 90vw;
+        
+    }
+
+    .main__calendar {
+        width: 90vw;
+    }
+
+    .main__events{
+        width: 90vw;
+    }
 }
 
 
 /* laptop, small screens */
 
 @media (min-width:769px) and (max-width:1024px){
-    
+    .main {
+        width: 90vw;
+        
+    }
+
+    .main__calendar {
+        width: 90vw;
+    }
+
+    .main__events{
+        width: 90vw;
+    }
 }
 
 /* desktop, larger screens */
 @media (min-width:1025px){
+    .main {
+        width: 90vw;
+        max-width: 1024px;
+        
+    }
 
+    .main__calendar {
+        width: 90vw;
+        max-width: 1024px;
+    }
+
+    .main__events{
+        width: 90vw;
+        max-width: 1024px;
+    }
 }
