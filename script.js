@@ -56,7 +56,70 @@ amountOfEvent()
 amountOfEvent()
 
 
+// kalender ---------------------
 
+generateACalendar()
+
+function generateACalendar(){
+
+	const months = [
+		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
+		"Juli", "Augusti", "September", "Oktober", "November", "December"
+	]
+
+	console.log('nu provar jag generateACalender funktionen ')
+	let date = new Date() //dag, månad, år + tidzon
+	let month = date.getMonth()
+	let year = date.getFullYear()
+	
+	// alert(date)
+	// alert(month)  Blir månad två pga array 0
+
+	//  'YYYY-MM-DD hh:mm:ss.mmm' format.
+	let dayInMonth = new Date(year, month +  1, 0).getDate()
+
+	// .getDate() ----- Tar man bort den förlorar tiden formatet
+
+	// januari är 0 (1 måste vara med för att korregera till rätt månad)
+	let firstDay = new Date(year, month, 1).getDay()
+
+	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
+	headerH1.innerText = ' ' + months[month] + ' ' + year; 
+
+	let dayCount = 1; 
+	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
+	for( let i = 0; i < 5; i++) {
+		let week = document.createElement('div')
+		week.classList.add('week')
+		
+		// en loop som körs 7 ggr och skapar dagarna
+		for(let d = 0; d < 7; d++ ){
+			let day = document.createElement('div')
+			day.classList.add('day')
+		
+			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
+			if(i === 0 && d < firstDay){
+				let white = document.createElement('div')
+				white.classList.add('white')
+				week.appendChild(white)
+
+			// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
+			} else if(dayCount > dayInMonth){
+				break;
+
+			// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
+			}else {
+				day.textContent = dayCount;
+				week.appendChild(day)
+				dayCount++;
+			}
+		}
+		// lägg till veckorna i kalender kontainern som hämtas med dom högre upp.
+		calendarSection.appendChild(week)
+
+	}
+
+}
 
 
 

@@ -156,3 +156,46 @@ body{
         max-width: 1024px;
     }
 }
+
+
+/* kalender  */
+
+#calendar{
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap:wrap;
+    padding:  20px;
+	margin: 0 auto;
+}
+
+.week {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+.day {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.645);
+  
+}
+.day:hover {
+    background-color: var(--offwhite);
+    color: black;
+  }
+  
+  .white {
+    width: 40px;
+    height: 40px;
+  }
