@@ -3,8 +3,10 @@
 :root{
 	--offwhite:#F5F5F5;
 	--darkgrey:#383838;
-    
-
+    --mediumgrey:#474747;
+    --holidayred:#F50606;
+    --eventred:#EC6D6D;
+    --eventyellow:#DCE000;
 }
 
 *{
@@ -62,6 +64,10 @@ body{
     width: 100vw;
     height: 5vh;
     padding-left: 1em;
+}
+
+.event-heading{
+    color:var(--darkgrey)
 }
 
 /* tablet */

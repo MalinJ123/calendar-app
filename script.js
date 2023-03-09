@@ -32,7 +32,7 @@ header.append(headerButtonLeft, headerH1, headerButtonRight)
 // Händelser
 const events = document.getElementById('events')
 const eventHeading = document.createElement('h3')
-eventHeading.setAttribute('class', 'eventHeading')
+eventHeading.setAttribute('class', 'event-heading')
 eventHeading.innerHTML = 'Händelse'
 
 events.append(eventHeading)
