@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
+
+:root{
+	--offwhite:#F5F5F5;
+	--darkgrey:#383838;
+}
+
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: 'Sen', sans-serif;
+}
+
+body{
+    background-color: var(--offwhite);
+    width: 100vw;
+    height: 100vh;    
+}
+.main {
+    width: 100vw;
+    height: 100vh;
+}
+.main__calendar {
+    width: 100vw;
+    height: 55vh;
+    border-radius: 0 0px 15px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--darkgrey);
+	box-shadow: 0px 9.3px 9.3px hsl(0deg 0% 0% / 0.36);
+}
+.main__head {
+    background-color: var(--darkgrey);
+    display: flex;
+    justify-content: space-between;
+    padding: 2em;
+	color:var(--offwhite);
+}
+.header__h1 {
+    font-size: 20px;
+}
+
+.header_button{
+    background-color: var(--darkgrey);
+    border-style: none; 
+    font-size: 1.5em;
+    color: var(--offwhite);
+    cursor: pointer;
+    
+}
+
+.main__events {
+    border:2px solid black;
+    margin-top: 2em;
+    width: 100vw;
+    height: 5vh;
+    padding-left: 1em;
+}
