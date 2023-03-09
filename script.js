@@ -30,11 +30,33 @@ header.append(headerButtonLeft, headerH1, headerButtonRight)
 
 
 // Händelser
-const events = document.getElementById('events')
-const eventHeading = document.createElement('h3')
-eventHeading.setAttribute('class', 'eventHeading')
-eventHeading.innerHTML = 'Händelse'
+function amountOfEvent() {
+	const events = document.createElement('div') 
+events.setAttribute('class', 'events')
 
-events.append(eventHeading)
+const eventHeading = document.createElement('h3')
+eventHeading.setAttribute('class', 'event-heading')
+
+const eventTime = document.createElement('p')
+eventTime.setAttribute('class', 'event-time')
+
+const eventCheck = document.createElement('input')
+eventCheck.setAttribute('class', 'event-check')
+
+eventCheck.type = 'checkbox'
+eventHeading.innerHTML = 'Händelse'
+eventTime.innerHTML = '09.00'
+
+events.append(eventHeading, eventTime, eventCheck)
+eventConatiner.append(events)
+}
+
+const eventConatiner = document.getElementById('eventContainer')
+amountOfEvent()
+amountOfEvent()
+
+
+
+
 
 
