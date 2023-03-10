@@ -105,6 +105,10 @@ function generateCalendar(month, year) {
 			let day = document.createElement('div')
 			day.classList.add('day')
 
+			if(d === 6) {
+				day.classList.add('red')
+			}
+
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
 				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
