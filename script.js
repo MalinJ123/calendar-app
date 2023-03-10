@@ -57,9 +57,9 @@ amountOfEvent()
 
 
 // kalender ---------------------
-let month = 2;
 
-function generateACalendar(month, year) {
+
+function generateCalendar(month, year) {
 
 	const months = [
 		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
@@ -84,13 +84,6 @@ function generateACalendar(month, year) {
 
 	let date = new Date(year, month);
 	let monthIndex = date.getMonth();
-
-	console.log('nu provar jag generateACalender funktionen ')
-
-	// alert(date)
-	// alert(month) Blir månad två pga array 0
-
-	//  'YYYY-MM-DD hh:mm:ss.mmm' format.
 	let dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
 
 	// .getDate() ----- Tar man bort den förlorar tiden formatet
@@ -116,24 +109,25 @@ function generateACalendar(month, year) {
 			if (i === 0 && d < firstDay) {
 				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
 				let dayNum = prevMonthDays - (firstDay - d) + 1;
+				if (dayNum > 0) {
 				day.innerText = dayNum
 				let white = document.createElement('div')
 				white.classList.add('white')
 				white.append(day)
 				week.append(white)
+			}
 
 				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
 			} else if (dayCount > dayInMonth) {
-				if (monthIndex === 2) {
-					let lastMonthDays = new Date(year, monthIndex).getDate();
-					let dayNum = lastMonthDays - (firstDay - d) - 3
-					day.innerText = dayNum
+				
+					let daysLeft = dayCount - dayInMonth;
+					day.innerText = daysLeft;
 					let white = document.createElement('div')
 					white.classList.add('white')
 					white.append(day)
 					week.append(white)
 					dayCount++;
-				}
+				
 				// break; 
 
 				// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
@@ -148,20 +142,28 @@ function generateACalendar(month, year) {
 
 	}
 }
-generateACalendar(2, 2023)
+generateCalendar(2, 2023)
 
-
+let currentMonth = 2;
+const currentYear = new Date().getFullYear();
 //Eventlyssnare på pilar 
 
 headerButtonLeft.addEventListener('click', () => {
 	while (calendarSection.firstChild) {
 		calendarSection.removeChild(calendarSection.firstChild)
 	}
-	generateACalendar(1, 2023)
+	currentMonth--
+	generateCalendar(currentMonth, currentYear)
 })
+
 headerButtonRight.addEventListener('click', () => {
 	while (calendarSection.firstChild) {
 		calendarSection.removeChild(calendarSection.firstChild)
 	}
-	generateACalendar(3, 2023)
+	currentMonth++
+	generateCalendar(currentMonth , currentYear)
 })
+
+
+
+
