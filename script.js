@@ -16,7 +16,20 @@ const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
 headerH1.innerText = 'March 2023'
 
-header.append(headerButtonLeft, headerH1, headerButtonRight)
+const emptySpace = document.createElement('div')
+emptySpace.setAttribute('class', 'emptySpace')
+
+const addEventButtonPlus = document.createElement('button')
+addEventButtonPlus.setAttribute('class', 'add-event-button-plus')
+addEventButtonPlus.innerHTML = '<i class="fa fa-plus fa-2x" aria-hidden="true"></i>'
+
+const AddEventButtonText = document.createElement('button')
+AddEventButtonText.setAttribute('class', 'add-event-button-text')
+AddEventButtonText.innerText= 'Lägg till'
+
+header.append(emptySpace, headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
+
+
 
 
 //kalender 
@@ -54,6 +67,85 @@ eventConatiner.append(events)
 const eventConatiner = document.getElementById('eventContainer')
 amountOfEvent()
 amountOfEvent()
+
+// Overlay
+const overlay = document.createElement('div')
+overlay.setAttribute('class', 'overlay')
+overlay.setAttribute('id', 'overlay')
+
+// Overlay Rubrik
+const overlayHeading = document.createElement('h4')
+overlayHeading.setAttribute('class', 'overlay-heading')
+overlayHeading.setAttribute('id', 'overlayHeading')
+overlayHeading.innerText = 'Torsdag 4/3'
+
+// Spara-knapp i overlay
+const saveButton = document.createElement('button')
+saveButton.setAttribute('class', 'save-button')
+saveButton.innerText = 'Spara'
+
+// Kryss för att stänga overlay
+const closeOverlayButton =document.createElement('button')
+closeOverlayButton.setAttribute('class', 'close-overlay-button')
+closeOverlayButton.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>'
+
+// Inputfält i overlay
+const addEvent = document.createElement('input')
+addEvent.setAttribute('class', 'add-event')
+addEvent.setAttribute('id', 'addEvent')
+
+// Startar
+const overlayStart = document.createElement('p')
+overlayStart.setAttribute('class', 'overlay-start')
+overlayStart.setAttribute('id', 'overlayStart')
+overlayStart.innerText = 'Startar'
+
+const overlayStartInput = document.createElement('input')
+overlayStartInput.setAttribute('class', 'overlay-start-input')
+overlayStartInput.setAttribute('id', 'overlayStartInput')
+overlayStartInput.type = 'number'
+
+// Slutar
+const overlayEnd = document.createElement('p')
+overlayEnd.setAttribute('class', 'overlay-end')
+overlayEnd.setAttribute('id', 'overlayEnd')
+overlayEnd.innerText = 'Slutar'
+
+const overlayEndInput = document.createElement('input')
+overlayEndInput.setAttribute('class', 'overlay-end-input')
+overlayEndInput.setAttribute('id', 'overlayEndInput')
+overlayEndInput.type = 'number'
+
+// Hela dagen
+const overlayDay = document.createElement('p')
+overlayDay.setAttribute('class', 'overlay-day')
+overlayDay.setAttribute('id', 'overlayDay')
+overlayDay.innerText = 'Hela dagen'
+
+const overlayDayCheckbox = document.createElement('input')
+overlayDayCheckbox.setAttribute('class', 'overlay-day-checkbox')
+overlayDayCheckbox.setAttribute('id', 'overlayDayCheckbox')
+overlayDayCheckbox.type = 'checkbox'
+
+const invisible = overlay.style.display = 'none'
+
+addEventButtonPlus.addEventListener('click', () => {
+	overlay.style.display = 'grid'
+})
+
+AddEventButtonText.addEventListener('click', () => {
+	overlay.style.display = 'grid'
+})
+
+closeOverlayButton.addEventListener('click', () => {
+	overlay.style.display = invisible
+})
+
+
+const contaierOverlay = document.getElementById('main')
+overlay.append(overlayHeading, saveButton, closeOverlayButton, overlayHeading, addEvent, overlayStart, overlayStartInput, overlayEnd, overlayEndInput, overlayDay, overlayDayCheckbox)
+contaierOverlay.append(overlay)
+
 
 
 // kalender ---------------------
