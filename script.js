@@ -89,13 +89,13 @@ const closeOverlayButton =document.createElement('button')
 closeOverlayButton.setAttribute('class', 'close-overlay-button')
 closeOverlayButton.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>'
 
-// Startar
+// Händelse
 const overlayEvent = document.createElement('p')
 overlayEvent.setAttribute('class', 'overlay-event')
 overlayEvent.setAttribute('id', 'overlayEvent')
 overlayEvent.innerText = 'Händelse'
 
-// Inputfält i overlay
+// Inputfält händelse
 const addEvent = document.createElement('input')
 addEvent.setAttribute('class', 'add-event')
 addEvent.setAttribute('id', 'addEvent')
@@ -135,6 +135,20 @@ overlayDayCheckbox.type = 'checkbox'
 
 const invisible = overlay.style.display = 'none'
 
+// funktion för att spara händelse i local storage
+function saveEvent(){
+	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
+		const eventInfo ={
+			event:addEvent.value,
+			start:overlayStartInput.value,
+			end:overlayEndInput.value,
+		}
+	eventList.push(eventInfo)
+		localStorage.setItem('eventList', JSON.stringify(eventList))
+	}
+
+// Klickhändelser för alla knappar
+
 addEventButtonPlus.addEventListener('click', () => {
 	overlay.style.display = 'grid'
 })
@@ -147,24 +161,18 @@ closeOverlayButton.addEventListener('click', () => {
 	overlay.style.display = invisible
 })
 
-let eventList = []
-
-eventList = JSON.parse(localStorage.getItem('eventList'))
-saveButton.addEventListener('click', () => {
-	const eventInputValue = addEvent.value
-	const eventStartTime = overlayStartInput.value
-	const eventEndTime = overlayEndInput.value
-
-	eventList.push(eventInputValue)
-	localStorage.setItem('eventList', JSON.stringify(eventList))
+ saveButton.addEventListener('click', () => {	
+	saveEvent()
 	addEvent.value = ''
+	overlayStartInput.value = ''
+	overlayEndInput.value = ''
 })
 
 
 
-const contaierOverlay = document.getElementById('main')
+const containerOverlay = document.getElementById('main')
 overlay.append(overlayHeading, saveButton, closeOverlayButton, overlayHeading, overlayEvent, addEvent, overlayStart, overlayStartInput, overlayEnd, overlayEndInput, overlayDay, overlayDayCheckbox)
-contaierOverlay.append(overlay)
+containerOverlay.append(overlay)
 
 
 
