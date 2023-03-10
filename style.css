@@ -185,9 +185,8 @@ body{
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  font-weight: bold;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.645);
+  color:var(--offwhite)
   
 }
 .day:hover {

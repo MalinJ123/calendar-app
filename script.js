@@ -67,6 +67,30 @@ function generateACalendar(){
 		"Juli", "Augusti", "September", "Oktober", "November", "December"
 	]
 
+
+
+	const days = [
+		"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
+	]
+	
+	const weekDays = document.createElement('div')
+	weekDays.setAttribute('class', 'week__days')
+
+	days.forEach((day) => {
+		const span = document.createElement('span')
+		span.innerText = day;
+		weekDays.append(span)
+	})
+
+	calendarSection.append(weekDays)
+
+
+
+
+
+
+
+
 	console.log('nu provar jag generateACalender funktionen ')
 	let date = new Date() //dag, månad, år + tidzon
 	let month = date.getMonth()
