@@ -89,6 +89,12 @@ const closeOverlayButton =document.createElement('button')
 closeOverlayButton.setAttribute('class', 'close-overlay-button')
 closeOverlayButton.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>'
 
+// Startar
+const overlayEvent = document.createElement('p')
+overlayEvent.setAttribute('class', 'overlay-event')
+overlayEvent.setAttribute('id', 'overlayEvent')
+overlayEvent.innerText = 'Händelse'
+
 // Inputfält i overlay
 const addEvent = document.createElement('input')
 addEvent.setAttribute('class', 'add-event')
@@ -103,7 +109,7 @@ overlayStart.innerText = 'Startar'
 const overlayStartInput = document.createElement('input')
 overlayStartInput.setAttribute('class', 'overlay-start-input')
 overlayStartInput.setAttribute('id', 'overlayStartInput')
-overlayStartInput.type = 'number'
+overlayStartInput.type = 'time'
 
 // Slutar
 const overlayEnd = document.createElement('p')
@@ -114,7 +120,7 @@ overlayEnd.innerText = 'Slutar'
 const overlayEndInput = document.createElement('input')
 overlayEndInput.setAttribute('class', 'overlay-end-input')
 overlayEndInput.setAttribute('id', 'overlayEndInput')
-overlayEndInput.type = 'number'
+overlayEndInput.type = 'time'
 
 // Hela dagen
 const overlayDay = document.createElement('p')
@@ -141,9 +147,23 @@ closeOverlayButton.addEventListener('click', () => {
 	overlay.style.display = invisible
 })
 
+let eventList = []
+
+eventList = JSON.parse(localStorage.getItem('eventList'))
+saveButton.addEventListener('click', () => {
+	const eventInputValue = addEvent.value
+	const eventStartTime = overlayStartInput.value
+	const eventEndTime = overlayEndInput.value
+
+	eventList.push(eventInputValue)
+	localStorage.setItem('eventList', JSON.stringify(eventList))
+	addEvent.value = ''
+})
+
+
 
 const contaierOverlay = document.getElementById('main')
-overlay.append(overlayHeading, saveButton, closeOverlayButton, overlayHeading, addEvent, overlayStart, overlayStartInput, overlayEnd, overlayEndInput, overlayDay, overlayDayCheckbox)
+overlay.append(overlayHeading, saveButton, closeOverlayButton, overlayHeading, overlayEvent, addEvent, overlayStart, overlayStartInput, overlayEnd, overlayEndInput, overlayDay, overlayDayCheckbox)
 contaierOverlay.append(overlay)
 
 
