@@ -10,7 +10,7 @@ headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
 
 const headerButtonRight = document.createElement('button')
 headerButtonRight.setAttribute('class', 'header_button')
-headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>' 
+headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
 
 const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
@@ -31,24 +31,24 @@ header.append(headerButtonLeft, headerH1, headerButtonRight)
 
 // Händelser
 function amountOfEvent() {
-	const events = document.createElement('label') 
-events.setAttribute('class', 'events')
+	const events = document.createElement('label')
+	events.setAttribute('class', 'events')
 
-const eventHeading = document.createElement('h3')
-eventHeading.setAttribute('class', 'event-heading')
+	const eventHeading = document.createElement('h3')
+	eventHeading.setAttribute('class', 'event-heading')
 
-const eventTime = document.createElement('p')
-eventTime.setAttribute('class', 'event-time')
+	const eventTime = document.createElement('p')
+	eventTime.setAttribute('class', 'event-time')
 
-const eventCheck = document.createElement('input')
-eventCheck.setAttribute('class', 'event-check')
+	const eventCheck = document.createElement('input')
+	eventCheck.setAttribute('class', 'event-check')
 
-eventCheck.type = 'checkbox'
-eventHeading.innerHTML = 'Händelse'
-eventTime.innerHTML = '09.00'
+	eventCheck.type = 'checkbox'
+	eventHeading.innerHTML = 'Händelse'
+	eventTime.innerHTML = '09.00'
 
-events.append(eventHeading, eventTime, eventCheck)
-eventConatiner.append(events)
+	events.append(eventHeading, eventTime, eventCheck)
+	eventConatiner.append(events)
 }
 
 const eventConatiner = document.getElementById('eventContainer')
@@ -60,19 +60,17 @@ amountOfEvent()
 
 generateACalendar()
 
-function generateACalendar(){
+function generateACalendar() {
 
 	const months = [
 		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
 		"Juli", "Augusti", "September", "Oktober", "November", "December"
 	]
 
-
-
 	const days = [
 		"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
 	]
-	
+
 	const weekDays = document.createElement('div')
 	weekDays.setAttribute('class', 'week__days')
 
@@ -95,20 +93,22 @@ function generateACalendar(){
 	let date = new Date() //dag, månad, år + tidzon
 	let month = date.getMonth()
 	let year = date.getFullYear()
-	
+
+
+
 	// alert(date)
-	// alert(month)  Blir månad två pga array 0
+	// alert(month) Blir månad två pga array 0
 
 	//  'YYYY-MM-DD hh:mm:ss.mmm' format.
-	let dayInMonth = new Date(year, month +  1, 0).getDate()
+	let dayInMonth = new Date(year, month + 1, 0).getDate()
 
 	// .getDate() ----- Tar man bort den förlorar tiden formatet
 
 	// januari är 0 (1 måste vara med för att korregera till rätt månad)
-	let firstDay = new Date(year, month, 1).getDay()
+	let firstDay = new Date(year, month, 1).getDay() - 1
 
 	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
-	headerH1.innerText = ' ' + months[month] + ' ' + year; 
+	headerH1.innerText = ' ' + months[month] + ' ' + year;
 
 	let dayCount = 1; 
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
@@ -123,13 +123,27 @@ function generateACalendar(){
 		
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if(i === 0 && d < firstDay){
-				let white = document.createElement('div')
+				let prevMonthDays = new Date(year, month, 0).getDate();
+				let dayNum = prevMonthDays - (firstDay - d) + 1;
+				day.innerText = dayNum
+                let white = document.createElement('div')
 				white.classList.add('white')
-				week.appendChild(white)
+				white.append(day)
+				week.append(white)
 
 			// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
 			} else if(dayCount > dayInMonth){
-				break;
+				if(month === 2) {
+					let lastMonthDays = new Date (year, month, 0).getDate() -31;
+					let dayNum = lastMonthDays + (firstDay + d) - 3
+					day.innerText = dayNum
+					let white = document.createElement('div')
+					white.classList.add('white')
+					white.append(day)
+					week.append(white)
+					dayCount++;
+				}
+				// break; 
 
 			// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
 			}else {
