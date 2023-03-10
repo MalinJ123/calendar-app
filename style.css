@@ -53,7 +53,7 @@ body {
     font-size: 20px;
 }
 
-.header_button {
+.header_button_left, .header_button_right {
     background-color: var(--darkgrey);
     border-style: none;
     font-size: 1.5em;

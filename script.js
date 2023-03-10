@@ -5,11 +5,11 @@ const eventSection = document.getElementById('events')
 
 //Header
 const headerButtonLeft = document.createElement('button')
-headerButtonLeft.setAttribute('class', 'header_button')
+headerButtonLeft.setAttribute('class', 'header_button_left')
 headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
 
 const headerButtonRight = document.createElement('button')
-headerButtonRight.setAttribute('class', 'header_button')
+headerButtonRight.setAttribute('class', 'header_button_right')
 headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
 
 const headerH1 = document.createElement('h1')
@@ -57,10 +57,9 @@ amountOfEvent()
 
 
 // kalender ---------------------
+let month = 2;
 
-generateACalendar()
-
-function generateACalendar() {
+function generateACalendar(month, year) {
 
 	const months = [
 		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
@@ -83,59 +82,51 @@ function generateACalendar() {
 	calendarSection.append(weekDays)
 
 
-
-
-
-
-
+	let date = new Date(year, month);
+	let monthIndex = date.getMonth();
 
 	console.log('nu provar jag generateACalender funktionen ')
-	let date = new Date() //dag, månad, år + tidzon
-	let month = date.getMonth()
-	let year = date.getFullYear()
-
-
 
 	// alert(date)
 	// alert(month) Blir månad två pga array 0
 
 	//  'YYYY-MM-DD hh:mm:ss.mmm' format.
-	let dayInMonth = new Date(year, month + 1, 0).getDate()
+	let dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
 
 	// .getDate() ----- Tar man bort den förlorar tiden formatet
 
-	// januari är 0 (1 måste vara med för att korregera till rätt månad)
-	let firstDay = new Date(year, month, 1).getDay() - 1
+
+	let firstDay = new Date(year, monthIndex).getDay() - 1
 
 	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
-	headerH1.innerText = ' ' + months[month] + ' ' + year;
+	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
 
-	let dayCount = 1; 
+	let dayCount = 1;
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
-	for( let i = 0; i < 5; i++) {
+	for (let i = 0; i < 5; i++) {
 		let week = document.createElement('div')
 		week.classList.add('week')
-		
+
 		// en loop som körs 7 ggr och skapar dagarna
-		for(let d = 0; d < 7; d++ ){
+		for (let d = 0; d < 7; d++) {
 			let day = document.createElement('div')
 			day.classList.add('day')
-		
+
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
-			if(i === 0 && d < firstDay){
-				let prevMonthDays = new Date(year, month, 0).getDate();
+			if (i === 0 && d < firstDay) {
+				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
 				let dayNum = prevMonthDays - (firstDay - d) + 1;
 				day.innerText = dayNum
-                let white = document.createElement('div')
+				let white = document.createElement('div')
 				white.classList.add('white')
 				white.append(day)
 				week.append(white)
 
-			// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
-			} else if(dayCount > dayInMonth){
-				if(month === 2) {
-					let lastMonthDays = new Date (year, month, 0).getDate() -31;
-					let dayNum = lastMonthDays + (firstDay + d) - 3
+				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
+			} else if (dayCount > dayInMonth) {
+				if (monthIndex === 2) {
+					let lastMonthDays = new Date(year, monthIndex).getDate();
+					let dayNum = lastMonthDays - (firstDay - d) - 3
 					day.innerText = dayNum
 					let white = document.createElement('div')
 					white.classList.add('white')
@@ -145,8 +136,8 @@ function generateACalendar() {
 				}
 				// break; 
 
-			// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
-			}else {
+				// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
+			} else {
 				day.textContent = dayCount;
 				week.appendChild(day)
 				dayCount++;
@@ -156,8 +147,21 @@ function generateACalendar() {
 		calendarSection.appendChild(week)
 
 	}
-
 }
+generateACalendar(2, 2023)
 
 
+//Eventlyssnare på pilar 
 
+headerButtonLeft.addEventListener('click', () => {
+	while (calendarSection.firstChild) {
+		calendarSection.removeChild(calendarSection.firstChild)
+	}
+	generateACalendar(1, 2023)
+})
+headerButtonRight.addEventListener('click', () => {
+	while (calendarSection.firstChild) {
+		calendarSection.removeChild(calendarSection.firstChild)
+	}
+	generateACalendar(3, 2023)
+})
