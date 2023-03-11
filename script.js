@@ -95,7 +95,7 @@ function generateCalendar(month, year) {
 	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
 
 	let dayCount = 1;
-	let selectedDate = null; //flr att bara en ska kunna bli märkt samtidigt. 
+	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt. 
 
 
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
@@ -145,16 +145,17 @@ function generateCalendar(month, year) {
 				dayCount++;
 
 				day.addEventListener('click', () => {
-					// remove white background from current selection (if any)
+					// Tar bort den vita bakgrunden om det är en som redan är klickad
 					if (selectedDate) {
 					  selectedDate.style.backgroundColor = '';
 					  selectedDate.style.color = '';
 					}
-					// add white background to clicked date
+					// lägger till vit bakgrund om ett datum blir klickad
 					day.style.backgroundColor = 'white';
 					day.style.color = 'black'
-					// update selected date
+					// updaterar valt datum
 					selectedDate = day;
+					//om dagen som blir klickad är en söndag så ska texten vara röd
 					if(d === 6) {
 						day.style.color = 'red'
 					}
@@ -188,10 +189,4 @@ headerButtonRight.addEventListener('click', () => {
 	generateCalendar(currentMonth , currentYear)
 })
 
-
-
-
-// /////// width: 40px;
-//     height: 40px;
-//     border-radius: 50%;////
 
