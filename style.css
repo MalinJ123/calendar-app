@@ -73,8 +73,10 @@ body{
 
 .events {
     display: grid;
-    grid-template-columns: 2em 1fr;
+    grid-template-columns: 2em 1fr 1fr;
     padding: 1em 0;
+    border-bottom: 1px solid var(--darkgrey);
+    margin-bottom: 1em;
 }
 
 .event-check {
@@ -85,7 +87,7 @@ body{
     width: 1.2em;
 }
 
-.event-check:hover, .event-heading:hover, .event-time:hover, .overlay-day-checkbox {
+.event-check:hover, .event-heading:hover, .event-time:hover, .overlay-day-checkbox, .events:hover {
     cursor: pointer;
 }
 
@@ -94,6 +96,7 @@ body{
     justify-self: flex-start;
     grid-column: 2;
     grid-row: 1;
+    color:var(--darkgrey)
 }
 
 .event-time {
@@ -101,16 +104,24 @@ body{
     justify-self: flex-start;
     grid-column: 2;
     grid-row: 2;
-    padding-bottom: 1em;
-    border-bottom: 1px solid var(--darkgrey);
     width: 95%;
 }
 
-.event-heading{
-    color:var(--darkgrey)
-
-    
+.event-delete {
+    grid-column: 3;    
+    grid-row: 1;
+    padding:0.3em 0.8em;
+    border-radius: 10px;
+    border: none;
+    width: 7em;
+    font-weight: 800;
+    cursor: pointer;
+    background-color: var(--eventred);
+    color: var(--darkgrey);
+    justify-self: flex-end;
+    margin-right: 2em;
 }
+
 .add-event-button-plus{
     border:none;
     display: block;
@@ -142,7 +153,7 @@ body{
     top: 0;
     bottom: 30em;
     margin: auto;
-    width: 75vw;
+    width: 100vw;
     max-width: 30em;
     height: 20em;
     background-color: var(--offwhite);
@@ -240,18 +251,18 @@ body{
 @media (min-width:481px) and (max-width:768px){
     .main {
         width: 90vw;
-        
     }
-
     .main__calendar {
         width: 90vw;
     }
-
     .main__events{
         width: 90vw;
     }
     .save-button {
         grid-column: 3;
+    }
+    .overlay {
+        width: 80vw;
     }
 }
 

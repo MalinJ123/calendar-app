@@ -10,7 +10,7 @@ headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
 
 const headerButtonRight = document.createElement('button')
 headerButtonRight.setAttribute('class', 'header_button')
-headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>' 
+headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
 
 const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
@@ -25,48 +25,11 @@ addEventButtonPlus.innerHTML = '<i class="fa fa-plus fa-2x" aria-hidden="true"><
 
 const AddEventButtonText = document.createElement('button')
 AddEventButtonText.setAttribute('class', 'add-event-button-text')
-AddEventButtonText.innerText= 'Lägg till'
+AddEventButtonText.innerText = 'Lägg till'
 
 header.append(emptySpace, headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
 
-
-
-
-//kalender 
-// let arry = []
-// for( let i = 0; i < 7; i++) {
-// const calendarH2 = document.createElement('h2') 
-// arry.push(calendarH2)
-// }
-// arry[1].innerText = 1
-
-
-
 // Händelser
-function amountOfEvent() {
-	const events = document.createElement('label') 
-events.setAttribute('class', 'events')
-
-const eventHeading = document.createElement('h3')
-eventHeading.setAttribute('class', 'event-heading')
-
-const eventTime = document.createElement('p')
-eventTime.setAttribute('class', 'event-time')
-
-const eventCheck = document.createElement('input')
-eventCheck.setAttribute('class', 'event-check')
-
-eventCheck.type = 'checkbox'
-eventHeading.innerHTML = 'Händelse'
-eventTime.innerHTML = '09.00'
-
-events.append(eventHeading, eventTime, eventCheck)
-eventConatiner.append(events)
-}
-
-const eventConatiner = document.getElementById('eventContainer')
-amountOfEvent()
-amountOfEvent()
 
 // Overlay
 const overlay = document.createElement('div')
@@ -85,7 +48,7 @@ saveButton.setAttribute('class', 'save-button')
 saveButton.innerText = 'Spara'
 
 // Kryss för att stänga overlay
-const closeOverlayButton =document.createElement('button')
+const closeOverlayButton = document.createElement('button')
 closeOverlayButton.setAttribute('class', 'close-overlay-button')
 closeOverlayButton.innerHTML = '<i class="fa fa-times fa-2x" aria-hidden="true"></i>'
 
@@ -136,16 +99,17 @@ overlayDayCheckbox.type = 'checkbox'
 const invisible = overlay.style.display = 'none'
 
 // funktion för att spara händelse i local storage
-function saveEvent(){
+function saveEvent() {
 	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
-		const eventInfo ={
-			event:addEvent.value,
-			start:overlayStartInput.value,
-			end:overlayEndInput.value,
-		}
-	eventList.push(eventInfo)
-		localStorage.setItem('eventList', JSON.stringify(eventList))
+	const eventInfo = {
+		event: addEvent.value,
+		start: overlayStartInput.value,
+		end: overlayEndInput.value,
 	}
+		eventList.push(eventInfo)
+		localStorage.setItem('eventList', JSON.stringify(eventList))
+
+}
 
 // Klickhändelser för alla knappar
 
@@ -161,11 +125,18 @@ closeOverlayButton.addEventListener('click', () => {
 	overlay.style.display = invisible
 })
 
- saveButton.addEventListener('click', () => {	
+saveButton.addEventListener('click', () => {
 	saveEvent()
 	addEvent.value = ''
 	overlayStartInput.value = ''
 	overlayEndInput.value = ''
+	eventConatiner.innerHTML = ''
+
+	// Publicera på sidan
+	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
+	for (const eventInfo of eventList) {
+		amountOfEvent(eventInfo)
+	}
 })
 
 
@@ -174,13 +145,57 @@ const containerOverlay = document.getElementById('main')
 overlay.append(overlayHeading, saveButton, closeOverlayButton, overlayHeading, overlayEvent, addEvent, overlayStart, overlayStartInput, overlayEnd, overlayEndInput, overlayDay, overlayDayCheckbox)
 containerOverlay.append(overlay)
 
+const eventConatiner = document.getElementById('eventContainer')
+function amountOfEvent(eventInfo) {
+	const events = document.createElement('label')
+	events.setAttribute('class', 'events')
+
+	const eventHeading = document.createElement('h3')
+	eventHeading.setAttribute('class', 'event-heading')
+	eventHeading.setAttribute('id', 'eventHeading')
+
+	const eventTime = document.createElement('p')
+	eventTime.setAttribute('class', 'event-time')
+
+	const eventCheck = document.createElement('input')
+	eventCheck.setAttribute('class', 'event-check')
+	eventCheck.type = 'checkbox'
+
+	// Radera händelse
+	const eventDelete = document.createElement('button')
+	eventDelete.setAttribute('class', 'event-delete')
+	eventDelete.setAttribute('id', 'eventDelete')
+	eventDelete.innerText = 'Ta bort'
+	eventDelete.addEventListener('click', (event) => {
+		let eventList = JSON.parse(localStorage.getItem('eventList') || '[]');
+		let deleteEvent = event.target.parentNode.querySelector('#eventHeading').textContent;
+	  
+		for (let i = 0; i < eventList.length; i++) {
+		  if (eventList[i].event === deleteEvent) {
+			eventList.splice(i, 1);
+			break;
+		  }
+		}
+	  
+		localStorage.setItem('eventList', JSON.stringify(eventList));
+		event.target.parentNode.remove();
+	  });
+	  
+	  
+
+	eventHeading.innerHTML = eventInfo.event
+	eventTime.innerHTML = `${eventInfo.start}-${eventInfo.end}`
+
+	events.append(eventHeading, eventTime, eventCheck, eventDelete)
+	eventConatiner.append(events)
+}
 
 
 // kalender ---------------------
 
 generateACalendar()
 
-function generateACalendar(){
+function generateACalendar() {
 
 	const months = [
 		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
@@ -191,12 +206,12 @@ function generateACalendar(){
 	let date = new Date() //dag, månad, år + tidzon
 	let month = date.getMonth()
 	let year = date.getFullYear()
-	
+
 	// alert(date)
 	// alert(month)  Blir månad två pga array 0
 
 	//  'YYYY-MM-DD hh:mm:ss.mmm' format.
-	let dayInMonth = new Date(year, month +  1, 0).getDate()
+	let dayInMonth = new Date(year, month + 1, 0).getDate()
 
 	// .getDate() ----- Tar man bort den förlorar tiden formatet
 
@@ -204,31 +219,31 @@ function generateACalendar(){
 	let firstDay = new Date(year, month, 1).getDay()
 
 	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
-	headerH1.innerText = ' ' + months[month] + ' ' + year; 
+	headerH1.innerText = ' ' + months[month] + ' ' + year;
 
-	let dayCount = 1; 
+	let dayCount = 1;
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
-	for( let i = 0; i < 5; i++) {
+	for (let i = 0; i < 5; i++) {
 		let week = document.createElement('div')
 		week.classList.add('week')
-		
+
 		// en loop som körs 7 ggr och skapar dagarna
-		for(let d = 0; d < 7; d++ ){
+		for (let d = 0; d < 7; d++) {
 			let day = document.createElement('div')
 			day.classList.add('day')
-		
+
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
-			if(i === 0 && d < firstDay){
+			if (i === 0 && d < firstDay) {
 				let white = document.createElement('div')
 				white.classList.add('white')
 				week.appendChild(white)
 
-			// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
-			} else if(dayCount > dayInMonth){
+				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
+			} else if (dayCount > dayInMonth) {
 				break;
 
-			// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
-			}else {
+				// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
+			} else {
 				day.textContent = dayCount;
 				week.appendChild(day)
 				dayCount++;
