@@ -95,6 +95,9 @@ function generateCalendar(month, year) {
 	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
 
 	let dayCount = 1;
+	let selectedDate = null; //flr att bara en ska kunna bli märkt samtidigt. 
+
+
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
 	for (let i = 0; i < 5; i++) {
 		let week = document.createElement('div')
@@ -108,6 +111,7 @@ function generateCalendar(month, year) {
 			if(d === 6) {
 				day.classList.add('red')
 			}
+			
 
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
@@ -139,6 +143,22 @@ function generateCalendar(month, year) {
 				day.textContent = dayCount;
 				week.appendChild(day)
 				dayCount++;
+
+				day.addEventListener('click', () => {
+					// remove white background from current selection (if any)
+					if (selectedDate) {
+					  selectedDate.style.backgroundColor = '';
+					  selectedDate.style.color = '';
+					}
+					// add white background to clicked date
+					day.style.backgroundColor = 'white';
+					day.style.color = 'black'
+					// update selected date
+					selectedDate = day;
+					if(d === 6) {
+						day.style.color = 'red'
+					}
+				  });
 			}
 		}
 		// lägg till veckorna i kalender kontainern som hämtas med dom högre upp.
@@ -170,4 +190,8 @@ headerButtonRight.addEventListener('click', () => {
 
 
 
+
+// /////// width: 40px;
+//     height: 40px;
+//     border-radius: 50%;////
 
