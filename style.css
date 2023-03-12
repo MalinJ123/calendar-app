@@ -18,7 +18,7 @@
 
 body{
     background-color: var(--offwhite);
-    width: 100vw;
+    width: 100%;
     height: 100vh; 
     display:flex;
     flex-direction: column;
@@ -105,6 +105,11 @@ body{
     grid-column: 2;
     grid-row: 2;
     width: 95%;
+}
+
+.event-all-day {
+    grid-column: 2;
+    grid-row: 3;
 }
 
 .event-delete {

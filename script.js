@@ -29,7 +29,7 @@ AddEventButtonText.innerText = 'Lägg till'
 
 header.append(emptySpace, headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
 
-// Händelser
+// Händelser---------
 
 // Overlay
 const overlay = document.createElement('div')
@@ -105,9 +105,10 @@ function saveEvent() {
 		event: addEvent.value,
 		start: overlayStartInput.value,
 		end: overlayEndInput.value,
+		allDay: 'Hela dagen'
 	}
-		eventList.push(eventInfo)
-		localStorage.setItem('eventList', JSON.stringify(eventList))
+	eventList.push(eventInfo)
+	localStorage.setItem('eventList', JSON.stringify(eventList))
 
 }
 
@@ -137,14 +138,14 @@ saveButton.addEventListener('click', () => {
 	for (const eventInfo of eventList) {
 		amountOfEvent(eventInfo)
 	}
+
 })
-
-
 
 const containerOverlay = document.getElementById('main')
 overlay.append(overlayHeading, saveButton, closeOverlayButton, overlayHeading, overlayEvent, addEvent, overlayStart, overlayStartInput, overlayEnd, overlayEndInput, overlayDay, overlayDayCheckbox)
 containerOverlay.append(overlay)
 
+// Händelseruta
 const eventConatiner = document.getElementById('eventContainer')
 function amountOfEvent(eventInfo) {
 	const events = document.createElement('label')
@@ -161,7 +162,9 @@ function amountOfEvent(eventInfo) {
 	eventCheck.setAttribute('class', 'event-check')
 	eventCheck.type = 'checkbox'
 
-	// Radera händelse
+
+
+	// Radera händelse 
 	const eventDelete = document.createElement('button')
 	eventDelete.setAttribute('class', 'event-delete')
 	eventDelete.setAttribute('id', 'eventDelete')
@@ -169,22 +172,24 @@ function amountOfEvent(eventInfo) {
 	eventDelete.addEventListener('click', (event) => {
 		let eventList = JSON.parse(localStorage.getItem('eventList') || '[]');
 		let deleteEvent = event.target.parentNode.querySelector('#eventHeading').textContent;
-	  
+
 		for (let i = 0; i < eventList.length; i++) {
-		  if (eventList[i].event === deleteEvent) {
-			eventList.splice(i, 1);
-			break;
-		  }
+			if (eventList[i].event === deleteEvent) {
+				eventList.splice(i, 1);
+				break;
+			}
 		}
-	  
+
 		localStorage.setItem('eventList', JSON.stringify(eventList));
 		event.target.parentNode.remove();
-	  });
-	  
-	  
+	});
 
 	eventHeading.innerHTML = eventInfo.event
 	eventTime.innerHTML = `${eventInfo.start}-${eventInfo.end}`
+
+	if (overlayDayCheckbox.checked == true && eventTime.innerHTML == '-') {
+		eventTime.innerHTML = eventInfo.allDay
+	}
 
 	events.append(eventHeading, eventTime, eventCheck, eventDelete)
 	eventConatiner.append(events)
