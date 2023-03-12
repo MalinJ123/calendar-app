@@ -69,9 +69,8 @@ body {
 
 /* Händelser */
 .main__event-container {
-    border:2px solid var(--darkgrey);
     margin-top: 2em;
-    padding-left: 1em;
+    padding: 0 1em;
 }
 
 .events {
