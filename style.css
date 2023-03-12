@@ -92,8 +92,14 @@ body {
 
 .event-check:hover,
 .event-heading:hover,
-.event-time:hover {
+.event-time:hover,
+.overlay-day-checkbox:hover {
     cursor: pointer;
+}
+
+.overlay-end-input:hover,
+.overlay-start-input:hover {
+    cursor:text ;
 }
 
 .event-heading {
