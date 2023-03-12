@@ -101,13 +101,23 @@ const invisible = overlay.style.display = 'none'
 // funktion för att spara händelse i local storage
 function saveEvent() {
 	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
-	const eventInfo = {
-		event: addEvent.value,
-		start: overlayStartInput.value,
-		end: overlayEndInput.value,
-		allDay: 'Hela dagen'
+	if (overlayDayCheckbox.checked == true) {
+		const eventInfo = {
+			event: addEvent.value,
+			start: overlayStartInput.value,
+			end: overlayEndInput.value,
+			allDay: 'Hela dagen'
+		}
+		eventList.push(eventInfo)
 	}
-	eventList.push(eventInfo)
+	else if(overlayDayCheckbox.checked == false) {
+		const eventInfo = {
+			event: addEvent.value,
+			start: overlayStartInput.value,
+			end: overlayEndInput.value,
+		}
+		eventList.push(eventInfo)
+	}
 	localStorage.setItem('eventList', JSON.stringify(eventList))
 
 }
@@ -162,8 +172,6 @@ function amountOfEvent(eventInfo) {
 	eventCheck.setAttribute('class', 'event-check')
 	eventCheck.type = 'checkbox'
 
-
-
 	// Radera händelse 
 	const eventDelete = document.createElement('button')
 	eventDelete.setAttribute('class', 'event-delete')
@@ -185,11 +193,13 @@ function amountOfEvent(eventInfo) {
 	});
 
 	eventHeading.innerHTML = eventInfo.event
-	eventTime.innerHTML = `${eventInfo.start}-${eventInfo.end}`
-
-	if (overlayDayCheckbox.checked == true && eventTime.innerHTML == '-') {
-		eventTime.innerHTML = eventInfo.allDay
+	if (eventInfo.allDay !== undefined) {
+		eventTime.innerHTML = eventInfo.allDay;
+	} else {
+		eventTime.innerHTML = `${eventInfo.start}-${eventInfo.end}`;
 	}
+
+
 
 	events.append(eventHeading, eventTime, eventCheck, eventDelete)
 	eventConatiner.append(events)
