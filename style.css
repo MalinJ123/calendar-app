@@ -1,33 +1,35 @@
 @import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
 
-:root{
-	--offwhite:#F5F5F5;
-	--darkgrey:#383838;
-    --mediumgrey:#474747;
-    --holidayred:#F50606;
-    --eventred:#EC6D6D;
-    --eventyellow:#DCE000;
+:root {
+    --offwhite: #F5F5F5;
+    --darkgrey: #383838;
+    --mediumgrey: #474747;
+    --holidayred: #F50606;
+    --eventred: #EC6D6D;
+    --eventyellow: #DCE000;
 }
 
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-	font-family: 'Sen', sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sen', sans-serif;
 }
 
-body{
+body {
     background-color: var(--offwhite);
     width: 100%;
     height: 100vh; 
     display:flex;
     flex-direction: column;
-    align-items: center;   
+    align-items: center;
 }
+
 .main {
     width: 100vw;
     height: 100vh;
 }
+
 .main__calendar {
     width: 100vw;
     height: 55vh;
@@ -36,27 +38,28 @@ body{
     justify-content: center;
     align-items: center;
     background-color: var(--darkgrey);
-	box-shadow: 0px 9.3px 9.3px hsl(0deg 0% 0% / 0.36);
+    box-shadow: 0px 9.3px 9.3px hsl(0deg 0% 0% / 0.36);
 }
+
 .main__head {
     background-color: var(--darkgrey);
     display: flex;
     justify-content: space-between;
     padding: 2em;
-	color:var(--offwhite);
+    color: var(--offwhite);
 }
 
 .header__h1 {
     font-size: 20px;
 }
 
-.header_button{
+.header_button_left, .header_button_right {
     background-color: var(--darkgrey);
-    border-style: none; 
+    border-style: none;
     font-size: 1.5em;
     color: var(--offwhite);
     cursor: pointer;
-    
+
 }
 
 .emptySpace, .plus {
@@ -87,7 +90,9 @@ body{
     width: 1.2em;
 }
 
-.event-check:hover, .event-heading:hover, .event-time:hover, .overlay-day-checkbox, .events:hover {
+.event-check:hover,
+.event-heading:hover,
+.event-time:hover {
     cursor: pointer;
 }
 
@@ -107,9 +112,8 @@ body{
     width: 95%;
 }
 
-.event-all-day {
-    grid-column: 2;
-    grid-row: 3;
+.event-heading {
+    color: var(--darkgrey)
 }
 
 .event-delete {
@@ -253,14 +257,15 @@ body{
 
 
 /* tablet */
-@media (min-width:481px) and (max-width:768px){
+@media (min-width:481px) and (max-width:768px) {
     .main {
         width: 90vw;
     }
     .main__calendar {
         width: 90vw;
     }
-    .main__events{
+
+    .main__events {
         width: 90vw;
     }
     .save-button {
@@ -274,17 +279,17 @@ body{
 
 /* laptop, small screens */
 
-@media (min-width:769px) and (max-width:1024px){
+@media (min-width:769px) and (max-width:1024px) {
     .main {
         width: 90vw;
-        
+
     }
 
     .main__calendar {
         width: 90vw;
     }
 
-    .main__events{
+    .main__events {
         width: 90vw;
     }
 
@@ -300,11 +305,11 @@ body{
 }
 
 /* desktop, larger screens */
-@media (min-width:1025px){
+@media (min-width:1025px) {
     .main {
         width: 90vw;
         max-width: 1024px;
-        
+
     }
 
     .main__calendar {
@@ -312,7 +317,7 @@ body{
         max-width: 1024px;
     }
 
-    .main__events{
+    .main__events {
         width: 90vw;
         max-width: 1024px;
     }
@@ -330,13 +335,13 @@ body{
 
 /* kalender  */
 
-#calendar{
-    display:flex;
+#calendar {
+    display: flex;
     justify-content: center;
     text-align: center;
-    flex-wrap:wrap;
-    padding:  20px;
-	margin: 0 auto;
+    flex-wrap: wrap;
+    padding: 20px;
+    margin: 0 auto;
 }
 
 .week {
@@ -346,26 +351,40 @@ body{
     align-items: center;
     width: 100%;
     margin-bottom: 10px;
-  }
+}
+
+.week__days {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    color: var(--offwhite);
+}
 
 .day {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  font-weight: bold;
-  cursor: pointer;
-  color: rgba(255, 255, 255, 0.645);
-  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--offwhite)
 }
+
 .day:hover {
     background-color: var(--offwhite);
     color: black;
-  }
-  
-  .white {
+}
+
+.white > .day {
+    color:#747474;
     width: 40px;
     height: 40px;
-  }
+}
+
+
+/*tillfällig färg på söndagar */
+.red {
+    color: red;
+}

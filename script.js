@@ -5,11 +5,11 @@ const eventSection = document.getElementById('events')
 
 //Header
 const headerButtonLeft = document.createElement('button')
-headerButtonLeft.setAttribute('class', 'header_button')
+headerButtonLeft.setAttribute('class', 'header_button_left')
 headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
 
 const headerButtonRight = document.createElement('button')
-headerButtonRight.setAttribute('class', 'header_button')
+headerButtonRight.setAttribute('class', 'header_button_right')
 headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
 
 const headerH1 = document.createElement('h1')
@@ -208,35 +208,46 @@ function amountOfEvent(eventInfo) {
 
 // kalender ---------------------
 
-generateACalendar()
 
-function generateACalendar() {
+function generateCalendar(month, year) {
 
 	const months = [
 		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
 		"Juli", "Augusti", "September", "Oktober", "November", "December"
 	]
 
-	console.log('nu provar jag generateACalender funktionen ')
-	let date = new Date() //dag, månad, år + tidzon
-	let month = date.getMonth()
-	let year = date.getFullYear()
+	const days = [
+		"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
+	]
 
-	// alert(date)
-	// alert(month)  Blir månad två pga array 0
+	const weekDays = document.createElement('div')
+	weekDays.setAttribute('class', 'week__days')
 
-	//  'YYYY-MM-DD hh:mm:ss.mmm' format.
-	let dayInMonth = new Date(year, month + 1, 0).getDate()
+	days.forEach((day) => {
+		const span = document.createElement('span')
+		span.innerText = day;
+		weekDays.append(span)
+	})
+
+	calendarSection.append(weekDays)
+
+
+	let date = new Date(year, month);
+	let monthIndex = date.getMonth();
+	let dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
 
 	// .getDate() ----- Tar man bort den förlorar tiden formatet
 
-	// januari är 0 (1 måste vara med för att korregera till rätt månad)
-	let firstDay = new Date(year, month, 1).getDay()
+
+	let firstDay = new Date(year, monthIndex).getDay() - 1
 
 	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
-	headerH1.innerText = ' ' + months[month] + ' ' + year;
+	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
 
 	let dayCount = 1;
+	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt. 
+
+
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
 	for (let i = 0; i < 5; i++) {
 		let week = document.createElement('div')
@@ -247,29 +258,85 @@ function generateACalendar() {
 			let day = document.createElement('div')
 			day.classList.add('day')
 
+			if(d === 6) {
+				day.classList.add('red')
+			}
+			
+
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
+				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
+				let dayNum = prevMonthDays - (firstDay - d) + 1;
+				if (dayNum > 0) {
+				day.innerText = dayNum
 				let white = document.createElement('div')
 				white.classList.add('white')
-				week.appendChild(white)
+				white.append(day)
+				week.append(white)
+			}
 
 				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
 			} else if (dayCount > dayInMonth) {
-				break;
+				
+					let daysLeft = dayCount - dayInMonth;
+					day.innerText = daysLeft;
+					let white = document.createElement('div')
+					white.classList.add('white')
+					white.append(day)
+					week.append(white)
+					dayCount++;
+				
+				// break; 
 
 				// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
 			} else {
 				day.textContent = dayCount;
 				week.appendChild(day)
 				dayCount++;
+
+				day.addEventListener('click', () => {
+					// Tar bort den vita bakgrunden om det är en som redan är klickad
+					if (selectedDate) {
+					  selectedDate.style.backgroundColor = '';
+					  selectedDate.style.color = '';
+					}
+					// lägger till vit bakgrund om ett datum blir klickad
+					day.style.backgroundColor = 'white';
+					day.style.color = 'black'
+					// updaterar valt datum
+					selectedDate = day;
+					//om dagen som blir klickad är en söndag så ska texten vara röd
+					if(d === 6) {
+						day.style.color = 'red'
+					}
+				  });
 			}
 		}
 		// lägg till veckorna i kalender kontainern som hämtas med dom högre upp.
 		calendarSection.appendChild(week)
 
 	}
-
 }
+generateCalendar(2, 2023)
 
+let currentMonth = 2;
+const currentYear = new Date().getFullYear();
+//Eventlyssnare på pilar 
+
+headerButtonLeft.addEventListener('click', () => {
+	while (calendarSection.firstChild) {
+		calendarSection.removeChild(calendarSection.firstChild)
+	}
+	currentMonth--
+	generateCalendar(currentMonth, currentYear)
+})
+
+headerButtonRight.addEventListener('click', () => {
+	while (calendarSection.firstChild) {
+		calendarSection.removeChild(calendarSection.firstChild)
+	}
+	currentMonth++
+	generateCalendar(currentMonth , currentYear)
+})
 
 
