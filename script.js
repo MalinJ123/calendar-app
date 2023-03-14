@@ -111,7 +111,7 @@ const invisible = overlay.style.display = 'none'
 
 // funktion för att spara händelse i local storage
 function saveEvent() {
-	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
+	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]');
 	if (overlayDayCheckbox.checked == true) {
 		const eventInfo = {
 			event: addEvent.value,
@@ -129,9 +129,17 @@ function saveEvent() {
 		}
 		eventList.push(eventInfo)
 	}
-	localStorage.setItem('eventList', JSON.stringify(eventList))
-
-}
+  
+	// Sortera händelse baserat på starttiden
+	eventList.sort((a, b) => {
+	  const aTime = a.start.split(':').join('')
+	  const bTime = b.start.split(':').join('')
+	  return aTime.localeCompare(bTime);
+	});
+  
+	localStorage.setItem('eventList', JSON.stringify(eventList));
+  }
+  
 
 // Klickhändelser för alla knappar
 
