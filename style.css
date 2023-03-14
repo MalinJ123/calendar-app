@@ -47,6 +47,8 @@ body {
     justify-content: space-between;
     padding: 2em;
     color: var(--offwhite);
+    margin-top: 2em;
+    border-radius: 15px 15px 0 0;
 }
 
 .header__h1 {

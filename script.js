@@ -110,7 +110,7 @@ function saveEvent() {
 		}
 		eventList.push(eventInfo)
 	}
-	else if(overlayDayCheckbox.checked == false) {
+	else if (overlayDayCheckbox.checked == false) {
 		const eventInfo = {
 			event: addEvent.value,
 			start: overlayStartInput.value,
@@ -258,34 +258,34 @@ function generateCalendar(month, year) {
 			let day = document.createElement('div')
 			day.classList.add('day')
 
-			if(d === 6) {
+			if (d === 6) {
 				day.classList.add('red')
 			}
-			
+
 
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
 				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
 				let dayNum = prevMonthDays - (firstDay - d) + 1;
 				if (dayNum > 0) {
-				day.innerText = dayNum
-				let white = document.createElement('div')
-				white.classList.add('white')
-				white.append(day)
-				week.append(white)
-			}
-
-				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
-			} else if (dayCount > dayInMonth) {
-				
-					let daysLeft = dayCount - dayInMonth;
-					day.innerText = daysLeft;
+					day.innerText = dayNum
 					let white = document.createElement('div')
 					white.classList.add('white')
 					white.append(day)
 					week.append(white)
-					dayCount++;
-				
+				}
+
+				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
+			} else if (dayCount > dayInMonth) {
+
+				let daysLeft = dayCount - dayInMonth;
+				day.innerText = daysLeft;
+				let white = document.createElement('div')
+				white.classList.add('white')
+				white.append(day)
+				week.append(white)
+				dayCount++;
+
 				// break; 
 
 				// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
@@ -297,8 +297,8 @@ function generateCalendar(month, year) {
 				day.addEventListener('click', () => {
 					// Tar bort den vita bakgrunden om det är en som redan är klickad
 					if (selectedDate) {
-					  selectedDate.style.backgroundColor = '';
-					  selectedDate.style.color = '';
+						selectedDate.style.backgroundColor = '';
+						selectedDate.style.color = '';
 					}
 					// lägger till vit bakgrund om ett datum blir klickad
 					day.style.backgroundColor = 'white';
@@ -306,10 +306,10 @@ function generateCalendar(month, year) {
 					// updaterar valt datum
 					selectedDate = day;
 					//om dagen som blir klickad är en söndag så ska texten vara röd
-					if(d === 6) {
+					if (d === 6) {
 						day.style.color = 'red'
 					}
-				  });
+				});
 			}
 		}
 		// lägg till veckorna i kalender kontainern som hämtas med dom högre upp.
@@ -336,7 +336,7 @@ headerButtonRight.addEventListener('click', () => {
 		calendarSection.removeChild(calendarSection.firstChild)
 	}
 	currentMonth++
-	generateCalendar(currentMonth , currentYear)
+	generateCalendar(currentMonth, currentYear)
 })
 
 
