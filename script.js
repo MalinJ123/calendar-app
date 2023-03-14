@@ -140,9 +140,7 @@ function saveEvent() {
 	localStorage.setItem('eventList', JSON.stringify(eventList));
   }
   
-
 // Klickhändelser för alla knappar
-
 addEventButtonPlus.addEventListener('click', () => {
 	overlay.style.display = 'grid'
 })
@@ -167,7 +165,7 @@ saveButton.addEventListener('click', () => {
 	for (const eventInfo of eventList) {
 		amountOfEvent(eventInfo)
 	}
-
+	overlay.style.display = invisible
 })
 
 const containerOverlay = document.getElementById('main')
@@ -190,7 +188,6 @@ function amountOfEvent(eventInfo) {
 	const eventCheck = document.createElement('input')
 	eventCheck.setAttribute('class', 'event-check')
 	eventCheck.type = 'checkbox'
-
 
 // Checka av händelse som avklarad
 eventCheck.addEventListener('click', () =>{
@@ -229,8 +226,6 @@ eventCheck.addEventListener('click', () =>{
 	} else {
 		eventTime.innerHTML = `${eventInfo.start}-${eventInfo.end}`;
 	}
-
-
 
 	events.append(eventHeading, eventTime, eventCheck, eventDelete)
 	eventConatiner.append(events)
