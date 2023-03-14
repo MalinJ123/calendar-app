@@ -96,6 +96,17 @@ overlayDayCheckbox.setAttribute('class', 'overlay-day-checkbox')
 overlayDayCheckbox.setAttribute('id', 'overlayDayCheckbox')
 overlayDayCheckbox.type = 'checkbox'
 
+overlayDayCheckbox.addEventListener('change', () => {
+	if (overlayDayCheckbox.checked == true) {
+		overlayStartInput.disabled = true
+		overlayEndInput.disabled = true
+	}
+	else {
+		overlayStartInput.disabled = false
+		overlayEndInput.disabled = false
+	}
+})
+
 const invisible = overlay.style.display = 'none'
 
 // funktion för att spara händelse i local storage
@@ -171,6 +182,12 @@ function amountOfEvent(eventInfo) {
 	const eventCheck = document.createElement('input')
 	eventCheck.setAttribute('class', 'event-check')
 	eventCheck.type = 'checkbox'
+
+
+// Checka av händelse som avklarad
+if(eventCheck.value !==0){
+	eventHeading.style.textDecoration = 'line-through'
+}
 
 	// Radera händelse 
 	const eventDelete = document.createElement('button')
