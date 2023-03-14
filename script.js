@@ -174,7 +174,7 @@ function amountOfEvent(eventInfo) {
 
 	const eventHeading = document.createElement('h3')
 	eventHeading.setAttribute('class', 'event-heading')
-	eventHeading.setAttribute('id', 'eventHeading')
+	eventHeading.setAttribute('id', 'event-heading')
 
 	const eventTime = document.createElement('p')
 	eventTime.setAttribute('class', 'event-time')
@@ -185,9 +185,15 @@ function amountOfEvent(eventInfo) {
 
 
 // Checka av händelse som avklarad
-if(eventCheck.value !==0){
-	eventHeading.style.textDecoration = 'line-through'
-}
+eventCheck.addEventListener('click', () =>{
+	
+	if (eventCheck.checked == true) {
+		eventHeading.style.textDecoration = 'line-through'
+		eventHeading.style.textDecorationThickness = '0.2rem'
+	} else {eventHeading.style.textDecoration = 'none'
+
+	}
+})
 
 	// Radera händelse 
 	const eventDelete = document.createElement('button')
@@ -196,7 +202,7 @@ if(eventCheck.value !==0){
 	eventDelete.innerText = 'Ta bort'
 	eventDelete.addEventListener('click', (event) => {
 		let eventList = JSON.parse(localStorage.getItem('eventList') || '[]');
-		let deleteEvent = event.target.parentNode.querySelector('#eventHeading').textContent;
+		let deleteEvent = event.target.parentNode.querySelector('#event-heading').textContent;
 
 		for (let i = 0; i < eventList.length; i++) {
 			if (eventList[i].event === deleteEvent) {
