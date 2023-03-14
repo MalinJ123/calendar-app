@@ -98,6 +98,25 @@ overlayDayCheckbox.type = 'checkbox'
 
 const invisible = overlay.style.display = 'none'
 
+
+////Knapp för dagens datum
+const currentDate = new Date();
+let dateButtonText = currentDate.getDate();
+const toTodaysDate = document.createElement('button')
+toTodaysDate.setAttribute('class', 'to-today')
+toTodaysDate.innerText = dateButtonText;
+
+header.append(toTodaysDate)
+
+toTodaysDate.addEventListener('click', () => {
+    // Remove all child nodes of the calendar section
+    while (calendarSection.firstChild) {
+        calendarSection.removeChild(calendarSection.firstChild);
+    }
+    // Generate the calendar with the current month and year
+    generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
+});
+
 // funktion för att spara händelse i local storage
 function saveEvent() {
 	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
@@ -208,18 +227,17 @@ function amountOfEvent(eventInfo) {
 
 // kalender ---------------------
 
+const months = [
+	"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
+	"Juli", "Augusti", "September", "Oktober", "November", "December"
+]
+
+const days = [
+	"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
+]
 
 function generateCalendar(month, year) {
-
-	const months = [
-		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
-		"Juli", "Augusti", "September", "Oktober", "November", "December"
-	]
-
-	const days = [
-		"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
-	]
-
+	
 	const weekDays = document.createElement('div')
 	weekDays.setAttribute('class', 'week__days')
 
@@ -231,22 +249,20 @@ function generateCalendar(month, year) {
 
 	calendarSection.append(weekDays)
 
-
-	let date = new Date(year, month);
-	let monthIndex = date.getMonth();
-	let dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
+	
+    let currentDate = new Date();
+	const date = new Date(year, month - 1, 1);
+	const monthIndex = date.getMonth();
+	const dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
+	const firstDay = new Date(year, monthIndex).getDay() - 1
 
 	// .getDate() ----- Tar man bort den förlorar tiden formatet
-
-
-	let firstDay = new Date(year, monthIndex).getDay() - 1
 
 	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
 	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
 
 	let dayCount = 1;
 	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt. 
-
 
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
 	for (let i = 0; i < 5; i++) {
@@ -257,6 +273,10 @@ function generateCalendar(month, year) {
 		for (let d = 0; d < 7; d++) {
 			let day = document.createElement('div')
 			day.classList.add('day')
+
+			if (year === currentDate.getFullYear() && monthIndex === currentDate.getMonth() && dayCount === currentDate.getDate()) {
+				day.classList.add('class', 'current-date')
+			}
 
 			if (d === 6) {
 				day.classList.add('red')
@@ -317,26 +337,38 @@ function generateCalendar(month, year) {
 
 	}
 }
-generateCalendar(2, 2023)
+generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
 
-let currentMonth = 2;
-const currentYear = new Date().getFullYear();
+let currentMonth = new Date().getMonth() + 1;
+let currentYear = new Date().getFullYear();
 //Eventlyssnare på pilar 
 
 headerButtonLeft.addEventListener('click', () => {
-	while (calendarSection.firstChild) {
-		calendarSection.removeChild(calendarSection.firstChild)
-	}
-	currentMonth--
-	generateCalendar(currentMonth, currentYear)
+    while (calendarSection.firstChild) {
+        calendarSection.removeChild(calendarSection.firstChild)
+    }
+    if (currentMonth === 1) {
+        currentMonth = 12;
+        currentYear--;
+    } else {
+        currentMonth--;
+    }
+    generateCalendar(currentMonth, currentYear);
 })
 
 headerButtonRight.addEventListener('click', () => {
-	while (calendarSection.firstChild) {
-		calendarSection.removeChild(calendarSection.firstChild)
-	}
-	currentMonth++
-	generateCalendar(currentMonth, currentYear)
+    while (calendarSection.firstChild) {
+        calendarSection.removeChild(calendarSection.firstChild)
+    }
+    if (currentMonth === 12) {
+        currentMonth = 1;
+        currentYear++;
+    } else {
+        currentMonth++;
+    }
+    generateCalendar(currentMonth, currentYear);
 })
 
+
+//uppdatera dagens datum
 

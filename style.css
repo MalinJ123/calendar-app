@@ -395,3 +395,14 @@ body {
 .red {
     color: red;
 }
+.current-date {
+    border: 2px solid var(--offwhite);
+}
+.to-today {
+    width: 3em;
+    box-shadow: none;
+    background-color: var(--darkgrey);
+    border: 2px solid var(--offwhite);
+    border-radius: 10px;
+    color: var(--offwhite);
+}
