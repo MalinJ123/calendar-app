@@ -157,7 +157,7 @@ body {
     margin-bottom: 0.5em;
     cursor: pointer;
     background-color: var(--eventred);
-    color: var(--darkgrey);
+    color: var(--offwhite);
     
 }
 
@@ -183,12 +183,14 @@ body {
 .overlay-heading {
     grid-column: 2;
     grid-row: 1;
+    justify-self: center;
 }
 
 .save-button{
     grid-column: 3;
-    grid-row:1;
+    grid-row:5;
     justify-self: flex-end;
+    margin-right: 1em;
     padding: 0.3em 0.8em;
     border-radius: 10px;
     border: none;
@@ -201,8 +203,9 @@ body {
 }
 
 .close-overlay-button{
-    grid-column: 1;
-    justify-self: flex ;
+    grid-column: 3;
+    justify-self: flex-end;
+    margin-right: 1em;
     width: fit-content;
     height: fit-content;
     border: none;
@@ -359,6 +362,8 @@ body {
     align-items: center;
     width: 100%;
     margin-bottom: 10px;
+    margin-left:40px;
+    margin-right: 40px;
 }
 
 .week__days {
@@ -367,6 +372,8 @@ body {
     justify-content: space-between;
     font-weight: bold;
     color: var(--offwhite);
+    margin-left:40px;
+    margin-right: 40px;
 }
 
 .day {
@@ -394,5 +401,6 @@ body {
 
 /*tillfällig färg på söndagar */
 .red {
-    color: red;
+    color: var(--eventred);
+    
 }
