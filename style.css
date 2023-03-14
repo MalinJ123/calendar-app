@@ -165,7 +165,7 @@ body {
     left: 0;
     right: 0;
     top: 0;
-    bottom: 30em;
+    bottom: 20vh;
     margin: auto;
     width: 100vw;
     max-width: 30em;
@@ -218,6 +218,7 @@ body {
 .add-event {
     grid-column: 2 / span 2;
     grid-row: 2;
+    font-size: 1em;
 }
 
 .overlay-start {
