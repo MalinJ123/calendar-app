@@ -356,6 +356,8 @@ body {
     align-items: center;
     width: 100%;
     margin-bottom: 10px;
+    margin-left:40px;
+    margin-right: 40px;
 }
 
 .week__days {
@@ -364,6 +366,8 @@ body {
     justify-content: space-between;
     font-weight: bold;
     color: var(--offwhite);
+    margin-left:40px;
+    margin-right: 40px;
 }
 
 .day {
