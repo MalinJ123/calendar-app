@@ -407,6 +407,8 @@ flex-shrink: 2;
     border-radius: 50%;
     cursor: pointer;
     color: var(--offwhite)
+    
+ 
 }
 
 .day:hover {
@@ -424,10 +426,17 @@ flex-shrink: 2;
 /*tillfällig färg på söndagar */
 .red {
     color: var(--eventred);
+    
 }
-.red:hover {
-    color: var(--eventred);
+
+/* --------------------------- */
+.day > .week-num{
+    color: var(--eventyellow);
+    position: absolute;
+    left: 15px;
+    font-size: 9px;
+    padding: 3px;
+    margin-bottom: 23px;
+
 }
-.current-date {
-    border: 2px solid var(--offwhite);
-}
+
