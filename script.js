@@ -4,6 +4,10 @@ const calendarSection = document.getElementById('calendar')
 const eventSection = document.getElementById('events')
 
 //Header
+
+const headerMonthContainer = document.createElement('section')
+headerMonthContainer.setAttribute ('class', 'header-month-container')
+
 const headerButtonLeft = document.createElement('button')
 headerButtonLeft.setAttribute('class', 'header_button_left')
 headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
@@ -32,9 +36,9 @@ const currentDate = new Date();
 let dateButtonText = currentDate.getDate();
 const toTodaysDate = document.createElement('button')
 toTodaysDate.setAttribute('class', 'to-today')
-toTodaysDate.innerText = dateButtonText;
+toTodaysDate.innerText = 'Idag';
 
-header.append(toTodaysDate)
+
 
 toTodaysDate.addEventListener('click', () => {
     
@@ -49,7 +53,8 @@ toTodaysDate.addEventListener('click', () => {
     generateCalendar(currentMonth, currentYear);
 });
 
-header.append(headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
+headerMonthContainer.append(headerButtonLeft, headerH1, headerButtonRight, )
+header.append(toTodaysDate, headerMonthContainer, addEventButtonPlus, AddEventButtonText)
 
 // Händelser---------
 
