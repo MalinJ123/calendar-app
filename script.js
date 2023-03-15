@@ -7,10 +7,12 @@ const eventSection = document.getElementById('events')
 const headerButtonLeft = document.createElement('button')
 headerButtonLeft.setAttribute('class', 'header_button_left')
 headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
+headerButtonLeft.ariaLabel = 'Last month'
 
 const headerButtonRight = document.createElement('button')
 headerButtonRight.setAttribute('class', 'header_button_right')
 headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
+headerButtonRight.ariaLabel = 'Next month'
 
 const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
