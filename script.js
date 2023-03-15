@@ -35,12 +35,16 @@ toTodaysDate.innerText = dateButtonText;
 header.append(toTodaysDate)
 
 toTodaysDate.addEventListener('click', () => {
-    // Remove all child nodes of the calendar section
+    
+    currentMonth = currentDate.getMonth() + 1;
+    currentYear = currentDate.getFullYear();
+    
+    
     while (calendarSection.firstChild) {
         calendarSection.removeChild(calendarSection.firstChild);
     }
-    // Generate the calendar with the current month and year
-    generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
+    
+    generateCalendar(currentMonth, currentYear);
 });
 
 header.append(headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
