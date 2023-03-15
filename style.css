@@ -385,6 +385,8 @@ body {
     border-radius: 50%;
     cursor: pointer;
     color: var(--offwhite)
+    
+ 
 }
 
 .day:hover {
@@ -406,10 +408,13 @@ body {
 }
 
 /* --------------------------- */
-.weekNumElem {
-    display: none;
-  }
-  
-  .week td:first-child .weekNumElem {
-    display: block;
-  }
+.week-num{
+    color: var(--eventyellow);
+    position: absolute;
+    left: 50px;
+    font-size: 9px;
+    padding: 3px;
+    margin-bottom: 23px;
+
+}
+

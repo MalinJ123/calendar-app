@@ -208,8 +208,6 @@ function amountOfEvent(eventInfo) {
 
 const weekDays = document.createElement('div')
 weekDays.setAttribute('class', 'week__days')
-// weekNumElem.textContent = getWeekNumber(currentDate);
-
 
 function generateCalendar(month, year) {
 	const months = [
@@ -221,11 +219,9 @@ function generateCalendar(month, year) {
 	]
 	
 	// Lägga till Vecka på kalendern 
-	
 	let date = new Date(year, month);
 	let monthIndex = date.getMonth();
 	let dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
-	// let weekNum = null ;
 	
 	let firstDay = new Date(year, monthIndex).getDay() - 1
 	
@@ -245,7 +241,7 @@ function generateCalendar(month, year) {
 	}
 	
 	
-	// Den här funktionen skapar måndag,tisdag, onsdag, torsdaag, etc
+	// Den här funktionen skapar måndag,tisdag, onsdag, torsdag, etc
 	let weekDays = document.createElement('div')
 	weekDays.setAttribute('class', 'week__days')
 	days.forEach((day) => {
@@ -255,13 +251,12 @@ function generateCalendar(month, year) {
 	})
 	
 	calendarSection.append(weekDays)
-	
-	// --------------------------------------------
-	
+		
 	let currentDate = new Date();
+
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
 	for (let i = 0; i < 5; i++) {
-		let weekNumElem = document.createElement('h1');
+		let weekNumElem = document.createElement('div');
 		weekNumElem.classList.add('week-num');
 
 		console.log(`Per vecka: daycount=${dayCount}, firstDay=${firstDay}`)
@@ -288,29 +283,20 @@ function generateCalendar(month, year) {
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
 				
-				// console.log('If 1: ', i, d)
 				let firstWeek = new Date(year, monthIndex - 1, dayNum)
 				weekNumElem.textContent = getWeekNumber(firstWeek) 
 				
-				
-				// if (dayNum > 0) {
-					// day.innerText = dayNum
 					let white = document.createElement('div')
 					white.classList.add('white')
 					white.append(day)
 					week.append(white)
 					
 					if(d===0){
-						// getWeekNumber(date)
-						// console.log('lägga in veckorna 1' , weekNumElem)
 						day.appendChild(weekNumElem)
-						day.classList.add('red')
 					}
-				// }
-				
+								
 				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
 			} else if (dayCount > dayInMonth) {
-				// console.log('If 2: ', dayCount, dayInMonth)
 				let daysLeft = dayCount - dayInMonth;
 				day.innerText = daysLeft;
 				let white = document.createElement('div')
@@ -319,28 +305,16 @@ function generateCalendar(month, year) {
 				week.append(white)
 				
 				dayCount++;
-				// break; 
 				
-				// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
+		// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
 			} else {
-				// console.log('If 3: ', i, d)
 				day.textContent = dayCount;
 				week.appendChild(day)
 				
 				if (d === 0) {
-					// getWeekNumber(date)
-					// console.log("lägga in veckorna 2", weekNumElem);
 					day.appendChild(weekNumElem);
-					day.classList.add("red");
 				}
-				// if( d === 0 && d < firstDay){
-				
-				// 	// week.appendChild(day)
-				// 	day.appendChild(weekNumElem);
-				// 	// day.textContent += 'TEST day week num'
-				
-				// }
-				
+								
 				dayCount++;
 				
 				day.addEventListener('click', () => {
@@ -367,8 +341,6 @@ function generateCalendar(month, year) {
 		
 	}
 }
-
-
 
 
 generateCalendar(2, 2023)
