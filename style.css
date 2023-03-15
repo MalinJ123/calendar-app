@@ -68,6 +68,7 @@ body {
 .main__event-container {
     margin-top: 2em;
     padding: 0 1em;
+    padding-bottom: 5em;
 }
 
 .events {
@@ -89,7 +90,8 @@ body {
 .event-check:hover,
 .event-heading:hover,
 .event-time:hover,
-.overlay-day-checkbox:hover {
+.overlay-day-checkbox:hover,
+.events:hover {
     cursor: pointer;
 }
 
