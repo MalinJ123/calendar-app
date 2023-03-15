@@ -64,11 +64,6 @@ body {
 
 }
 
-.emptySpace, .plus {
-    width: 2em;
-    height: 20px
-}
-
 /* Händelser */
 .main__event-container {
     margin-top: 2em;
@@ -402,5 +397,19 @@ body {
 /*tillfällig färg på söndagar */
 .red {
     color: var(--eventred);
-    
+}
+.red:hover {
+    color: var(--eventred);
+}
+.current-date {
+    border: 2px solid var(--offwhite);
+}
+.to-today {
+    cursor: pointer;
+    width: 3em;
+    box-shadow: none;
+    background-color: var(--darkgrey);
+    border: 2px solid var(--offwhite);
+    border-radius: 10px;
+    color: var(--offwhite);
 }
