@@ -51,8 +51,31 @@ body {
     border-radius: 15px 15px 0 0;
 }
 
+.to-today {
+    cursor: pointer;
+    width: 3em;
+    box-shadow: none;
+    background-color: var(--darkgrey);
+    border:none;
+    font-size: 1em;
+   /*  border: 2px solid var(--offwhite);
+    border-radius: 10px; */
+    color: var(--eventyellow);
+}
+
+.header-month-container{
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+min-width: 10rem;
+max-width: 37rem;
+flex-grow: 1;
+flex-shrink: 2;
+}
+
 .header__h1 {
     font-size: 20px;
+ 
 }
 
 .header_button_left, .header_button_right {
@@ -405,13 +428,4 @@ body {
 }
 .current-date {
     border: 2px solid var(--offwhite);
-}
-.to-today {
-    cursor: pointer;
-    width: 3em;
-    box-shadow: none;
-    background-color: var(--darkgrey);
-    border: 2px solid var(--offwhite);
-    border-radius: 10px;
-    color: var(--offwhite);
 }
