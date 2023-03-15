@@ -272,6 +272,9 @@ body {
     .main__calendar {
         width: 90vw;
     }
+    #calendar {
+        padding: 1em;
+    }
 
     .main__events {
         width: 90vw;
@@ -348,7 +351,6 @@ body {
     justify-content: center;
     text-align: center;
     flex-wrap: wrap;
-    padding: 20px;
     margin: 0 auto;
 }
 
@@ -359,8 +361,8 @@ body {
     align-items: center;
     width: 100%;
     margin-bottom: 10px;
-    margin-left:40px;
-    margin-right: 40px;
+    margin-left:5vw;
+    margin-right: 5vw;
 }
 
 .week__days {
@@ -369,8 +371,8 @@ body {
     justify-content: space-between;
     font-weight: bold;
     color: var(--offwhite);
-    margin-left:40px;
-    margin-right: 40px;
+    margin-left:5vw;
+    margin-right: 5vw;
 }
 
 .day {
