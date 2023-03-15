@@ -404,3 +404,12 @@ body {
     color: var(--eventred);
     
 }
+
+/* --------------------------- */
+.weekNumElem {
+    display: none;
+  }
+  
+  .week td:first-child .weekNumElem {
+    display: block;
+  }
