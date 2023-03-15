@@ -16,8 +16,6 @@ const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
 headerH1.innerText = 'March 2023'
 
-const emptySpace = document.createElement('div')
-emptySpace.setAttribute('class', 'emptySpace')
 
 const addEventButtonPlus = document.createElement('button')
 addEventButtonPlus.setAttribute('class', 'add-event-button-plus')
@@ -27,7 +25,25 @@ const AddEventButtonText = document.createElement('button')
 AddEventButtonText.setAttribute('class', 'add-event-button-text')
 AddEventButtonText.innerText = 'Lägg till'
 
-header.append(emptySpace, headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
+////Knapp för dagens datum
+const currentDate = new Date();
+let dateButtonText = currentDate.getDate();
+const toTodaysDate = document.createElement('button')
+toTodaysDate.setAttribute('class', 'to-today')
+toTodaysDate.innerText = dateButtonText;
+
+header.append(toTodaysDate)
+
+toTodaysDate.addEventListener('click', () => {
+    // Remove all child nodes of the calendar section
+    while (calendarSection.firstChild) {
+        calendarSection.removeChild(calendarSection.firstChild);
+    }
+    // Generate the calendar with the current month and year
+    generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
+});
+
+header.append(headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
 
 // Händelser---------
 
@@ -98,24 +114,6 @@ overlayDayCheckbox.type = 'checkbox'
 
 const invisible = overlay.style.display = 'none'
 
-
-////Knapp för dagens datum
-const currentDate = new Date();
-let dateButtonText = currentDate.getDate();
-const toTodaysDate = document.createElement('button')
-toTodaysDate.setAttribute('class', 'to-today')
-toTodaysDate.innerText = dateButtonText;
-
-header.append(toTodaysDate)
-
-toTodaysDate.addEventListener('click', () => {
-    // Remove all child nodes of the calendar section
-    while (calendarSection.firstChild) {
-        calendarSection.removeChild(calendarSection.firstChild);
-    }
-    // Generate the calendar with the current month and year
-    generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
-});
 
 // funktion för att spara händelse i local storage
 function saveEvent() {
