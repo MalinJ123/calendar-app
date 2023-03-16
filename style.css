@@ -33,6 +33,7 @@ body {
 .main__calendar {
     width: 100vw;
     height: 55vh;
+    padding-bottom: 5em;
     border-radius: 0 0px 15px 15px;
     display: flex;
     justify-content: center;
@@ -129,6 +130,7 @@ flex-shrink: 2;
     margin-bottom: 10px;
     margin-left:5vw;
     margin-right: 5vw;
+    height:4.5em;
 }
 
 .week__days {
@@ -139,6 +141,7 @@ flex-shrink: 2;
     color: var(--offwhite);
     margin-left:5vw;
     margin-right: 5vw;
+    padding-bottom: 2em;
 }
 
 .day {
@@ -176,16 +179,11 @@ flex-shrink: 2;
 
 .week-num{
     color: var(--eventyellow);
-    font-size: 9px;
-    padding-right: 0.5em;
-    margin-bottom: 23px;
-
+    width: 40px;
+    height: 40px;
+   font-size: 0.8em;
 }
 
-.day:first-child{
-    display:flex;
-    flex-direction: row-reverse;
-}
 
 /* Händelser */
 .main__event-container {

@@ -7,10 +7,12 @@ const eventSection = document.getElementById('events')
 const headerButtonLeft = document.createElement('button')
 headerButtonLeft.setAttribute('class', 'header_button_left')
 headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
+headerButtonLeft.ariaLabel = 'Tillbaka till tidgare månad'
 
 const headerButtonRight = document.createElement('button')
 headerButtonRight.setAttribute('class', 'header_button_right')
 headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
+headerButtonLeft.ariaLabel = 'Till nästa månad'
 
 const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
@@ -34,6 +36,8 @@ toTodaysDate.innerText = "Idag";
 header.append(toTodaysDate)
 
 toTodaysDate.addEventListener('click', () => {
+	currentMonth = new Date().getMonth() + 1;
+	currentYear = new Date().getFullYear();;
     // Remove all child nodes of the calendar section
     while (calendarSection.firstChild) {
         calendarSection.removeChild(calendarSection.firstChild);
@@ -230,7 +234,7 @@ const months = [
 ]
 
 const days = [
-	"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
+	"Vecka", "Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
 ]
 
 function generateCalendar(month, year) {
@@ -280,6 +284,10 @@ function generateCalendar(month, year) {
 		
 		let week = document.createElement('div')
 		week.classList.add('week')
+
+		if (i === 0 || i === 2 || i === 4) {
+			week.style.backgroundColor = "#474747"
+		}
 		
 		week.append(weekNumElem)
 		// en loop som körs 7 ggr och skapar dagarna
