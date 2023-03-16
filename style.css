@@ -48,8 +48,6 @@ body {
     justify-content: space-between;
     padding: 2em;
     color: var(--offwhite);
-    margin-top: 2em;
-    border-radius: 15px 15px 0 0;
     box-shadow: 0px 9.3px 9.3px hsl(0deg 0% 0% / 0.36);
 }
 
@@ -372,6 +370,11 @@ body {
         width: 90vw;
     }
 
+    .main__head {
+        margin-top: 2em;
+        border-radius: 15px 15px 0 0;
+    }
+
     .main__calendar {
         width: 90vw;
     }
@@ -402,6 +405,11 @@ body {
 
     }
 
+    .main__head {
+        margin-top: 2em;
+        border-radius: 15px 15px 0 0;
+    }
+
     .main__calendar {
         width: 90vw;
     }
@@ -428,7 +436,11 @@ body {
     .main {
         width: 90vw;
         max-width: 1024px;
+    }
 
+    .main__head {
+        margin-top: 2em;
+        border-radius: 15px 15px 0 0;
     }
 
     .main__calendar {
