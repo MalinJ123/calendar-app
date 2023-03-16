@@ -411,10 +411,15 @@ body {
 /* --------------------------- */
 .week-num{
     color: var(--eventyellow);
+    font-size: 12px;
+    padding-right: 1em;
     font-size: 9px;
     padding: 1em;
     margin-bottom: 23px;
-
+}
+.day:first-child{
+    display:flex;
+    flex-direction: row-reverse;
 }
 
 .day:first-child{
