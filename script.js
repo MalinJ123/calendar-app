@@ -184,7 +184,7 @@ saveButton.addEventListener('click', () => {
 	overlayStartInput.value = ''
 	overlayEndInput.value = ''
 	eventConatiner.innerHTML = ''
-
+	
 	// Publicera på sidan
 	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
 	for (const eventInfo of eventList) {
@@ -202,14 +202,14 @@ const eventConatiner = document.getElementById('eventContainer')
 function amountOfEvent(eventInfo) {
 	const events = document.createElement('label')
 	events.setAttribute('class', 'events')
-
+	
 	const eventHeading = document.createElement('h3')
 	eventHeading.setAttribute('class', 'event-heading')
 	eventHeading.setAttribute('id', 'eventHeading')
 
 	const eventTime = document.createElement('p')
 	eventTime.setAttribute('class', 'event-time')
-
+	
 	const eventCheck = document.createElement('input')
 	eventCheck.setAttribute('class', 'event-check')
 	eventCheck.type = 'checkbox'
@@ -243,11 +243,11 @@ function amountOfEvent(eventInfo) {
 				break;
 			}
 		}
-
+		
 		localStorage.setItem('eventList', JSON.stringify(eventList));
 		event.target.parentNode.remove();
 	});
-
+	
 	eventHeading.innerHTML = eventInfo.event
 	if (eventInfo.allDay !== undefined) {
 		eventTime.innerHTML = eventInfo.allDay;
