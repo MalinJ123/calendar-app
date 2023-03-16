@@ -7,21 +7,23 @@ const eventSection = document.getElementById('events')
 const headerButtonLeft = document.createElement('button')
 headerButtonLeft.setAttribute('class', 'header_button_left')
 headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
-headerButtonLeft.ariaLabel = 'Tillbaka till tidgare månad'
+headerButtonLeft.ariaLabel = 'Tidigare månad'
 
 const headerButtonRight = document.createElement('button')
 headerButtonRight.setAttribute('class', 'header_button_right')
 headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
-headerButtonLeft.ariaLabel = 'Till nästa månad'
+headerButtonRight.ariaLabel = 'Nästa månad'
 
 const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
-headerH1.innerText = 'March 2023'
+headerH1.innerText = 'Mars 2023'
 
 
 const addEventButtonPlus = document.createElement('button')
 addEventButtonPlus.setAttribute('class', 'add-event-button-plus')
 addEventButtonPlus.innerHTML = '<i class="fa fa-plus fa-2x" aria-hidden="true"></i>'
+addEventButtonPlus.ariaLabel = 'Lägg till händelse'
+
 
 const AddEventButtonText = document.createElement('button')
 AddEventButtonText.setAttribute('class', 'add-event-button-text')
