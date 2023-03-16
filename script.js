@@ -184,6 +184,8 @@ saveButton.addEventListener('click', () => {
 	overlayStartInput.value = ''
 	overlayEndInput.value = ''
 	eventConatiner.innerHTML = ''
+
+	overlay.style.display = invisible
 	
 	// Publicera på sidan
 	let eventList = JSON.parse(localStorage.getItem('eventList') || '[]')
