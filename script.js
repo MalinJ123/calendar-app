@@ -281,6 +281,10 @@ function generateCalendar(month, year) {
 		
 		let week = document.createElement('div')
 		week.classList.add('week')
+
+		if (i === 0 || i === 2 || i === 4) {
+			week.style.backgroundColor = "#474747"
+		}
 		
 		week.append(weekNumElem)
 		// en loop som körs 7 ggr och skapar dagarna
