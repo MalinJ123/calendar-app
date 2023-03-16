@@ -262,11 +262,27 @@ function generateCalendar(month, year) {
 	let dayCount = 1;
 	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt. 
 
+	
+	function getWeekNumber(date) {
+		// Obs! Inte säkert att den räknar rätt. Årets första vecka varierar när den börjar. Se: https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
+		const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+		const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+		return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+	}
+
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
 	for (let i = 0; i < 5; i++) {
+		let weekNumElem = document.createElement('div');
+		weekNumElem.classList.add('week-num');
+
+		console.log(`Per vecka: daycount=${dayCount}, firstDay=${firstDay}`)
+		let firstDayOfWeek = new Date(year, monthIndex, dayCount -  - firstDay)
+		weekNumElem.textContent = getWeekNumber(firstDayOfWeek);
+		
 		let week = document.createElement('div')
 		week.classList.add('week')
-
+		
+		week.append(weekNumElem)
 		// en loop som körs 7 ggr och skapar dagarna
 		for (let d = 0; d < 7; d++) {
 			let day = document.createElement('div')
@@ -283,6 +299,7 @@ function generateCalendar(month, year) {
 
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
+
 				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
 				let dayNum = prevMonthDays - (firstDay - d) + 1;
 				if (dayNum > 0) {
@@ -293,6 +310,11 @@ function generateCalendar(month, year) {
 					week.append(white)
 				}
 
+				
+                let firstWeek = new Date(year, monthIndex - 1, dayNum)
+				weekNumElem.textContent = getWeekNumber(firstWeek) 
+
+				
 				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
 			} else if (dayCount > dayInMonth) {
 
