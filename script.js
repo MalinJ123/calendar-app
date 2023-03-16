@@ -343,6 +343,11 @@ function generateCalendar(month, year) {
 }
 
 
+
+
+
+
+
 generateCalendar(2, 2023)
 
 let currentMonth = 2;
