@@ -38,11 +38,9 @@ const toTodaysDate = document.createElement('button')
 toTodaysDate.setAttribute('class', 'to-today')
 toTodaysDate.innerText = 'Idag';
 
-
-
 toTodaysDate.addEventListener('click', () => {
     
-    currentMonth = currentDate.getMonth() + 1;
+    currentMonth = currentDate.getMonth() +1;
     currentYear = currentDate.getFullYear();
     
     
@@ -260,95 +258,125 @@ eventCheck.addEventListener('click', () =>{
 }
 
 
-// kalender ---------------------
 
-const months = [
-	"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
-	"Juli", "Augusti", "September", "Oktober", "November", "December"
-]
+// -------------------------------
 
-const days = [
-	"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
-]
+// kalender -----Från malin ----------------
+
+const weekDays = document.createElement('div')
+weekDays.setAttribute('class', 'week__days')
+
 
 function generateCalendar(month, year) {
+	const months = [
+		"Januari", "Feburari", "Mars", "April", "Maj", "Juni",
+		"Juli", "Augusti", "September", "Oktober", "November", "December"
+	]
+	const days = [
+		"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
+	]
 	
-	const weekDays = document.createElement('div')
+	// Lägga till Vecka på kalendern 
+	let date = new Date(year, month);
+	let monthIndex = date.getMonth()-1;
+	let dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
+	
+	let firstDay = new Date(year, monthIndex).getDay() - 1
+	
+	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
+	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
+	
+	let dayCount = 1;
+	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt.
+	
+	
+	function getWeekNumber(date) {
+		// Obs! Inte säkert att den räknar rätt. Årets första vecka varierar när den börjar. Se: https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
+		const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
+		const pastDaysOfYear = (date - firstDayOfYear) / 86400000;
+		return Math.ceil((pastDaysOfYear + firstDayOfYear.getDay() + 1) / 7);
+	}
+	
+	
+	// Den här funktionen skapar måndag,tisdag, onsdag, torsdag, etc
+	let weekDays = document.createElement('div')
 	weekDays.setAttribute('class', 'week__days')
-
 	days.forEach((day) => {
-		const span = document.createElement('span')
+		let span = document.createElement('span')
 		span.innerText = day;
 		weekDays.append(span)
 	})
-
-	calendarSection.append(weekDays)
-
 	
-    let currentDate = new Date();
-	const date = new Date(year, month - 1, 1);
-	const monthIndex = date.getMonth();
-	const dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
-	const firstDay = new Date(year, monthIndex).getDay() - 1
-
-	// .getDate() ----- Tar man bort den förlorar tiden formatet
-
-	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
-	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
-
-	let dayCount = 1;
-	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt. 
+	calendarSection.append(weekDays)
+		
+	let currentDate = new Date();
 
 	// en yttre loop som körs 5 ggr för att skapa 5 veckor 
 	for (let i = 0; i < 5; i++) {
+		let weekNumElem = document.createElement('div');
+		weekNumElem.classList.add('week-num');
+
+		console.log(`Per vecka: daycount=${dayCount}, firstDay=${firstDay}`)
+		let firstDayOfWeek = new Date(year, monthIndex, dayCount -  - firstDay)
+		weekNumElem.textContent = getWeekNumber(firstDayOfWeek);
+		
 		let week = document.createElement('div')
 		week.classList.add('week')
-
+		
+		
 		// en loop som körs 7 ggr och skapar dagarna
 		for (let d = 0; d < 7; d++) {
 			let day = document.createElement('div')
 			day.classList.add('day')
-
-			if (year === currentDate.getFullYear() && monthIndex === currentDate.getMonth() && dayCount === currentDate.getDate()) {
-				day.classList.add('class', 'current-date')
-			}
-
+			let prevMonthDays = new Date(year, monthIndex, 0).getDate();
+			let dayNum = prevMonthDays - (firstDay - d) + 1;
+			console.log('dayNum', dayNum)
+			day.innerText = dayNum
+			
+			if (year === currentDate.getFullYear() && monthIndex  === currentDate.getMonth() && dayCount === currentDate.getDate() ) {
+                day.classList.add('class', 'current-date')
+            }
 			if (d === 6) {
 				day.classList.add('red')
 			}
-
-
+			
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
-				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
-				let dayNum = prevMonthDays - (firstDay - d) + 1;
-				if (dayNum > 0) {
-					day.innerText = dayNum
+				
+				let firstWeek = new Date(year, monthIndex - 1, dayNum)
+				weekNumElem.textContent = getWeekNumber(firstWeek) 
+				
 					let white = document.createElement('div')
 					white.classList.add('white')
 					white.append(day)
 					week.append(white)
-				}
-
+					
+					if(d===0){
+						day.appendChild(weekNumElem)
+					}
+								
 				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
 			} else if (dayCount > dayInMonth) {
-
 				let daysLeft = dayCount - dayInMonth;
 				day.innerText = daysLeft;
 				let white = document.createElement('div')
 				white.classList.add('white')
 				white.append(day)
 				week.append(white)
+				
 				dayCount++;
-
-				// break; 
-
-				// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
+				
+		// annars sätts texten på dagen (nummer) och läggs till i veckan. Samt ökar "daycount" för att räkna dagarna i veckan.
 			} else {
 				day.textContent = dayCount;
 				week.appendChild(day)
+				
+				if (d === 0) {
+					day.appendChild(weekNumElem);
+				}
+								
 				dayCount++;
-
+				
 				day.addEventListener('click', () => {
 					// Tar bort den vita bakgrunden om det är en som redan är klickad
 					if (selectedDate) {
@@ -363,15 +391,20 @@ function generateCalendar(month, year) {
 					//om dagen som blir klickad är en söndag så ska texten vara röd
 					if (d === 6) {
 						day.style.color = 'red'
+						
 					}
 				});
 			}
 		}
 		// lägg till veckorna i kalender kontainern som hämtas med dom högre upp.
 		calendarSection.appendChild(week)
-
+		
 	}
 }
+
+
+
+
 generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
 
 let currentMonth = new Date().getMonth() + 1;
@@ -390,6 +423,8 @@ headerButtonLeft.addEventListener('click', () => {
     }
     generateCalendar(currentMonth, currentYear);
 })
+
+
 
 headerButtonRight.addEventListener('click', () => {
     while (calendarSection.firstChild) {
