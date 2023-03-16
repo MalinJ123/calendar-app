@@ -38,11 +38,9 @@ const toTodaysDate = document.createElement('button')
 toTodaysDate.setAttribute('class', 'to-today')
 toTodaysDate.innerText = 'Idag';
 
-
-
 toTodaysDate.addEventListener('click', () => {
     
-    currentMonth = currentDate.getMonth() + 1;
+    currentMonth = currentDate.getMonth() +1;
     currentYear = currentDate.getFullYear();
     
     
@@ -242,10 +240,14 @@ function amountOfEvent(eventInfo) {
 }
 
 
-// kalender ---------------------
+
+// -------------------------------
+
+// kalender -----Från malin ----------------
 
 const weekDays = document.createElement('div')
 weekDays.setAttribute('class', 'week__days')
+
 
 function generateCalendar(month, year) {
 	const months = [
@@ -258,7 +260,7 @@ function generateCalendar(month, year) {
 	
 	// Lägga till Vecka på kalendern 
 	let date = new Date(year, month);
-	let monthIndex = date.getMonth();
+	let monthIndex = date.getMonth()-1;
 	let dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
 	
 	let firstDay = new Date(year, monthIndex).getDay() - 1
@@ -269,7 +271,6 @@ function generateCalendar(month, year) {
 	let dayCount = 1;
 	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt.
 	
-	// ----------------------------------------
 	
 	function getWeekNumber(date) {
 		// Obs! Inte säkert att den räknar rätt. Årets första vecka varierar när den börjar. Se: https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
@@ -314,6 +315,9 @@ function generateCalendar(month, year) {
 			console.log('dayNum', dayNum)
 			day.innerText = dayNum
 			
+			if (year === currentDate.getFullYear() && monthIndex  === currentDate.getMonth() && dayCount === currentDate.getDate() ) {
+                day.classList.add('class', 'current-date')
+            }
 			if (d === 6) {
 				day.classList.add('red')
 			}
@@ -381,7 +385,9 @@ function generateCalendar(month, year) {
 }
 
 
-generateCalendar(2, 2023)
+
+
+generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
 
 let currentMonth = new Date().getMonth() + 1;
 let currentYear = new Date().getFullYear();
@@ -399,6 +405,8 @@ headerButtonLeft.addEventListener('click', () => {
     }
     generateCalendar(currentMonth, currentYear);
 })
+
+
 
 headerButtonRight.addEventListener('click', () => {
     while (calendarSection.firstChild) {
