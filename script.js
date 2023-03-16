@@ -27,10 +27,9 @@ AddEventButtonText.innerText = 'Lägg till'
 
 ////Knapp för dagens datum
 const currentDate = new Date();
-let dateButtonText = currentDate.getDate();
 const toTodaysDate = document.createElement('button')
 toTodaysDate.setAttribute('class', 'to-today')
-toTodaysDate.innerText = dateButtonText;
+toTodaysDate.innerText = "Idag";
 
 header.append(toTodaysDate)
 
