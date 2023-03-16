@@ -30,12 +30,13 @@ const currentDate = new Date();
 let dateButtonText = currentDate.getDate();
 const toTodaysDate = document.createElement('button')
 toTodaysDate.setAttribute('class', 'to-today')
-toTodaysDate.innerText = dateButtonText;
+toTodaysDate.innerText = "Idag";
 
 header.append(toTodaysDate)
 
 toTodaysDate.addEventListener('click', () => {
     // Remove all child nodes of the calendar section
+    
     while (calendarSection.firstChild) {
         calendarSection.removeChild(calendarSection.firstChild);
     }
