@@ -38,12 +38,12 @@ header.append(toTodaysDate)
 toTodaysDate.addEventListener('click', () => {
 	currentMonth = new Date().getMonth() + 1;
 	currentYear = new Date().getFullYear();;
-    // Remove all child nodes of the calendar section
-    while (calendarSection.firstChild) {
-        calendarSection.removeChild(calendarSection.firstChild);
-    }
-    // Generate the calendar with the current month and year
-    generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
+	// Remove all child nodes of the calendar section
+	while (calendarSection.firstChild) {
+		calendarSection.removeChild(calendarSection.firstChild);
+	}
+	// Generate the calendar with the current month and year
+	generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
 });
 
 header.append(headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
@@ -115,6 +115,17 @@ overlayDayCheckbox.setAttribute('class', 'overlay-day-checkbox')
 overlayDayCheckbox.setAttribute('id', 'overlayDayCheckbox')
 overlayDayCheckbox.type = 'checkbox'
 
+overlayDayCheckbox.addEventListener('change', () => {
+	if (overlayDayCheckbox.checked == true) {
+		overlayStartInput.disabled = true
+		overlayEndInput.disabled = true
+	}
+	else {
+		overlayStartInput.disabled = false
+		overlayEndInput.disabled = false
+	}
+})
+
 const invisible = overlay.style.display = 'none'
 
 
@@ -138,9 +149,18 @@ function saveEvent() {
 		}
 		eventList.push(eventInfo)
 	}
-	localStorage.setItem('eventList', JSON.stringify(eventList))
 
+	// Sortera händelse baserat på starttiden
+	eventList.sort((a, b) => {
+		const aTime = a.start.split(':').join('')
+		const bTime = b.start.split(':').join('')
+		return aTime.localeCompare(bTime);
+	});
+
+	localStorage.setItem('eventList', JSON.stringify(eventList));
 }
+
+
 
 // Klickhändelser för alla knappar
 
@@ -192,6 +212,20 @@ function amountOfEvent(eventInfo) {
 	eventCheck.setAttribute('class', 'event-check')
 	eventCheck.type = 'checkbox'
 
+
+	// Checka av händelse som avklarad
+	eventCheck.addEventListener('click', () => {
+
+		if (eventCheck.checked == true) {
+			eventHeading.style.textDecoration = 'line-through'
+			eventHeading.style.textDecorationThickness = '0.2rem'
+		} else {
+			eventHeading.style.textDecoration = 'none'
+
+		}
+	})
+
+
 	// Radera händelse 
 	const eventDelete = document.createElement('button')
 	eventDelete.setAttribute('class', 'event-delete')
@@ -238,7 +272,7 @@ const days = [
 ]
 
 function generateCalendar(month, year) {
-	
+
 	const weekDays = document.createElement('div')
 	weekDays.setAttribute('class', 'week__days')
 
@@ -250,8 +284,8 @@ function generateCalendar(month, year) {
 
 	calendarSection.append(weekDays)
 
-	
-    let currentDate = new Date();
+
+	let currentDate = new Date();
 	const date = new Date(year, month - 1, 1);
 	const monthIndex = date.getMonth();
 	const dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
@@ -265,7 +299,7 @@ function generateCalendar(month, year) {
 	let dayCount = 1;
 	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt. 
 
-	
+
 	function getWeekNumber(date) {
 		// Obs! Inte säkert att den räknar rätt. Årets första vecka varierar när den börjar. Se: https://stackoverflow.com/questions/6117814/get-week-of-year-in-javascript-like-in-php
 		const firstDayOfYear = new Date(date.getFullYear(), 0, 1);
@@ -279,16 +313,16 @@ function generateCalendar(month, year) {
 		weekNumElem.classList.add('week-num');
 
 		console.log(`Per vecka: daycount=${dayCount}, firstDay=${firstDay}`)
-		let firstDayOfWeek = new Date(year, monthIndex, dayCount -  - firstDay)
+		let firstDayOfWeek = new Date(year, monthIndex, dayCount - - firstDay)
 		weekNumElem.textContent = getWeekNumber(firstDayOfWeek);
-		
+
 		let week = document.createElement('div')
 		week.classList.add('week')
 
 		if (i === 0 || i === 2 || i === 4) {
 			week.style.backgroundColor = "#474747"
 		}
-		
+
 		week.append(weekNumElem)
 		// en loop som körs 7 ggr och skapar dagarna
 		for (let d = 0; d < 7; d++) {
@@ -317,11 +351,11 @@ function generateCalendar(month, year) {
 					week.append(white)
 				}
 
-				
-                let firstWeek = new Date(year, monthIndex - 1, dayNum)
-				weekNumElem.textContent = getWeekNumber(firstWeek) 
 
-				
+				let firstWeek = new Date(year, monthIndex - 1, dayNum)
+				weekNumElem.textContent = getWeekNumber(firstWeek)
+
+
 				// Här kontrollerar jag ifall antalet dagar som skapats i kalendern är fler än antalet dagar i månaden. I så fall stopp.
 			} else if (dayCount > dayInMonth) {
 
@@ -371,29 +405,29 @@ let currentYear = new Date().getFullYear();
 //Eventlyssnare på pilar 
 
 headerButtonLeft.addEventListener('click', () => {
-    while (calendarSection.firstChild) {
-        calendarSection.removeChild(calendarSection.firstChild)
-    }
-    if (currentMonth === 1) {
-        currentMonth = 12;
-        currentYear--;
-    } else {
-        currentMonth--;
-    }
-    generateCalendar(currentMonth, currentYear);
+	while (calendarSection.firstChild) {
+		calendarSection.removeChild(calendarSection.firstChild)
+	}
+	if (currentMonth === 1) {
+		currentMonth = 12;
+		currentYear--;
+	} else {
+		currentMonth--;
+	}
+	generateCalendar(currentMonth, currentYear);
 })
 
 headerButtonRight.addEventListener('click', () => {
-    while (calendarSection.firstChild) {
-        calendarSection.removeChild(calendarSection.firstChild)
-    }
-    if (currentMonth === 12) {
-        currentMonth = 1;
-        currentYear++;
-    } else {
-        currentMonth++;
-    }
-    generateCalendar(currentMonth, currentYear);
+	while (calendarSection.firstChild) {
+		calendarSection.removeChild(calendarSection.firstChild)
+	}
+	if (currentMonth === 12) {
+		currentMonth = 1;
+		currentYear++;
+	} else {
+		currentMonth++;
+	}
+	generateCalendar(currentMonth, currentYear);
 })
 
 
