@@ -7,19 +7,23 @@ const eventSection = document.getElementById('events')
 const headerButtonLeft = document.createElement('button')
 headerButtonLeft.setAttribute('class', 'header_button_left')
 headerButtonLeft.innerHTML = '<i class="ri-arrow-left-line"></i>'
+headerButtonLeft.ariaLabel = 'Tidigare månad'
 
 const headerButtonRight = document.createElement('button')
 headerButtonRight.setAttribute('class', 'header_button_right')
 headerButtonRight.innerHTML = '<i class="ri-arrow-right-line"></i>'
+headerButtonRight.ariaLabel = 'Nästa månad'
 
 const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
-headerH1.innerText = 'March 2023'
+headerH1.innerText = 'Mars 2023'
 
 
 const addEventButtonPlus = document.createElement('button')
 addEventButtonPlus.setAttribute('class', 'add-event-button-plus')
 addEventButtonPlus.innerHTML = '<i class="fa fa-plus fa-2x" aria-hidden="true"></i>'
+addEventButtonPlus.ariaLabel = 'Lägg till händelse'
+
 
 const AddEventButtonText = document.createElement('button')
 AddEventButtonText.setAttribute('class', 'add-event-button-text')
@@ -27,18 +31,16 @@ AddEventButtonText.innerText = 'Lägg till'
 
 ////Knapp för dagens datum
 const currentDate = new Date();
-let dateButtonText = currentDate.getDate();
 const toTodaysDate = document.createElement('button')
 toTodaysDate.setAttribute('class', 'to-today')
 toTodaysDate.innerText = "Idag";
 
 header.append(toTodaysDate)
 
-toTodaysDate.addEventListener('click', () => {
-    // Remove all child nodes of the calendar section
+toTodaysDate.addEventListener('click', () => {   
     currentMonth = currentDate.getMonth() + 1;
     currentYear = currentDate.getFullYear();
-
+	// Remove all child nodes of the calendar section
     while (calendarSection.firstChild) {
         calendarSection.removeChild(calendarSection.firstChild);
     }
@@ -115,6 +117,17 @@ overlayDayCheckbox.setAttribute('class', 'overlay-day-checkbox')
 overlayDayCheckbox.setAttribute('id', 'overlayDayCheckbox')
 overlayDayCheckbox.type = 'checkbox'
 
+overlayDayCheckbox.addEventListener('change', () => {
+	if (overlayDayCheckbox.checked == true) {
+		overlayStartInput.disabled = true
+		overlayEndInput.disabled = true
+	}
+	else {
+		overlayStartInput.disabled = false
+		overlayEndInput.disabled = false
+	}
+})
+
 const invisible = overlay.style.display = 'none'
 
 
@@ -138,9 +151,18 @@ function saveEvent() {
 		}
 		eventList.push(eventInfo)
 	}
-	localStorage.setItem('eventList', JSON.stringify(eventList))
 
+	// Sortera händelse baserat på starttiden
+	eventList.sort((a, b) => {
+		const aTime = a.start.split(':').join('')
+		const bTime = b.start.split(':').join('')
+		return aTime.localeCompare(bTime);
+	});
+
+	localStorage.setItem('eventList', JSON.stringify(eventList))
 }
+
+
 
 // Klickhändelser för alla knappar
 
@@ -180,52 +202,66 @@ containerOverlay.append(overlay)
 // Händelseruta
 const eventConatiner = document.getElementById('eventContainer')
 function amountOfEvent(eventInfo) {
-	const events = document.createElement('label')
-	events.setAttribute('class', 'events')
+		const events = document.createElement('label')
+		events.setAttribute('class', 'events')
 
-	const eventHeading = document.createElement('h3')
-	eventHeading.setAttribute('class', 'event-heading')
-	eventHeading.setAttribute('id', 'eventHeading')
+		const eventHeading = document.createElement('h3')
+		eventHeading.setAttribute('class', 'event-heading')
+		eventHeading.setAttribute('id', 'eventHeading')
 
-	const eventTime = document.createElement('p')
-	eventTime.setAttribute('class', 'event-time')
+		const eventTime = document.createElement('p')
+		eventTime.setAttribute('class', 'event-time')
 
-	const eventCheck = document.createElement('input')
-	eventCheck.setAttribute('class', 'event-check')
-	eventCheck.type = 'checkbox'
+		const eventCheck = document.createElement('input')
+		eventCheck.setAttribute('class', 'event-check')
+		eventCheck.type = 'checkbox'
 
-	// Radera händelse 
-	const eventDelete = document.createElement('button')
-	eventDelete.setAttribute('class', 'event-delete')
-	eventDelete.setAttribute('id', 'eventDelete')
-	eventDelete.innerText = 'Ta bort'
-	eventDelete.addEventListener('click', (event) => {
-		let eventList = JSON.parse(localStorage.getItem('eventList') || '[]');
-		let deleteEvent = event.target.parentNode.querySelector('#eventHeading').textContent;
 
-		for (let i = 0; i < eventList.length; i++) {
-			if (eventList[i].event === deleteEvent) {
-				eventList.splice(i, 1);
-				break;
+		// Checka av händelse som avklarad
+		eventCheck.addEventListener('click', () => {
+
+			if (eventCheck.checked == true) {
+				eventHeading.style.textDecoration = 'line-through'
+				eventHeading.style.textDecorationThickness = '0.2rem'
+			} else {
+				eventHeading.style.textDecoration = 'none'
+
 			}
+		})
+
+
+		// Radera händelse 
+		const eventDelete = document.createElement('button')
+		eventDelete.setAttribute('class', 'event-delete')
+		eventDelete.setAttribute('id', 'eventDelete')
+		eventDelete.innerText = 'Ta bort'
+		eventDelete.addEventListener('click', (event) => {
+			let eventList = JSON.parse(localStorage.getItem('eventList') || '[]');
+			let deleteEvent = event.target.parentNode.querySelector('#eventHeading').textContent;
+
+			for (let i = 0; i < eventList.length; i++) {
+				if (eventList[i].event === deleteEvent) {
+					eventList.splice(i, 1);
+					break;
+				}
+			}
+
+			localStorage.setItem('eventList', JSON.stringify(eventList));
+			event.target.parentNode.remove();
+		});
+
+		eventHeading.innerHTML = eventInfo.event
+		if (eventInfo.allDay !== undefined) {
+			eventTime.innerHTML = eventInfo.allDay;
+		} else {
+			eventTime.innerHTML = `${eventInfo.start}-${eventInfo.end}`;
 		}
 
-		localStorage.setItem('eventList', JSON.stringify(eventList));
-		event.target.parentNode.remove();
-	});
 
-	eventHeading.innerHTML = eventInfo.event
-	if (eventInfo.allDay !== undefined) {
-		eventTime.innerHTML = eventInfo.allDay;
-	} else {
-		eventTime.innerHTML = `${eventInfo.start}-${eventInfo.end}`;
+
+		events.append(eventHeading, eventTime, eventCheck, eventDelete)
+		eventConatiner.append(events)
 	}
-
-
-
-	events.append(eventHeading, eventTime, eventCheck, eventDelete)
-	eventConatiner.append(events)
-}
 
 
 // kalender ---------------------
