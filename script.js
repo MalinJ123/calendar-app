@@ -236,7 +236,7 @@ const months = [
 ]
 
 const days = [
-	"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
+	"Vecka", "Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
 ]
 
 function generateCalendar(month, year) {
