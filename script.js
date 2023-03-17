@@ -36,7 +36,9 @@ header.append(toTodaysDate)
 
 toTodaysDate.addEventListener('click', () => {
     // Remove all child nodes of the calendar section
-    
+    currentMonth = currentDate.getMonth() + 1;
+    currentYear = currentDate.getFullYear();
+
     while (calendarSection.firstChild) {
         calendarSection.removeChild(calendarSection.firstChild);
     }
@@ -232,7 +234,7 @@ const months = [
 ]
 
 const days = [
-	"Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
+	"Vecka", "Mån", "Tis", "Ons", "Tors", "Fre", "Lör", "Sön"
 ]
 
 function generateCalendar(month, year) {
