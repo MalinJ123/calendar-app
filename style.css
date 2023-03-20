@@ -133,6 +133,7 @@ body {
     margin-bottom: 10px;
     margin-left: 5vw;
     margin-right: 5vw;
+    padding: 0 1em;
     height: 4.5em;
 }
 
@@ -144,7 +145,13 @@ body {
     color: var(--offwhite);
     margin-left: 5vw;
     margin-right: 5vw;
+    padding: 0 1em;
     padding-bottom: 2em;
+}
+
+.week__days>span{
+    width:40px;
+    text-align: center;
 }
 
 .day {
