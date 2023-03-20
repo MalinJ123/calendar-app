@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sen&display=swap');
 
+
 :root {
     --offwhite: #F5F5F5;
     --darkgrey: #383838;
@@ -141,9 +142,17 @@ body {
     justify-content: space-between;
     font-weight: bold;
     color: var(--offwhite);
-    margin-left: 5vw;
+    margin-left: 4vw;
     margin-right: 5vw;
     padding-bottom: 2em;
+}
+
+.week__days :first-child{
+     font-size: 0.7em;
+     font-weight: none;
+     margin-top: 3px;
+     margin-left: 0.5em;
+     color: var(--darkgrey)
 }
 
 .day {
@@ -183,10 +192,15 @@ body {
 
 .week-num {
     color: var(--eventyellow);
-    width: 40px;
+    width: 20px;
     height: 40px;
     font-size: 0.8em;
+    border: 2px solid hotpink;
+    justify-content: flex-end;
+
 }
+
+
 
 
 /* Händelser */

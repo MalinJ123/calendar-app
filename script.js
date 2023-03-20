@@ -295,8 +295,6 @@ function generateCalendar(month, year) {
 	const dayInMonth = new Date(year, monthIndex + 1, 0).getDate()
 	const firstDay = new Date(year, monthIndex).getDay() - 1
 
-	// .getDate() ----- Tar man bort den förlorar tiden formatet
-
 	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
 	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
 
