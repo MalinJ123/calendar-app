@@ -75,7 +75,10 @@ body {
     font-size: 20px;
     width:8em;
     text-align: center;
+}
 
+.header__h2 {
+   display: none;
 }
 
 .header_button_left,
@@ -85,7 +88,18 @@ body {
     font-size: 1.5em;
     color: var(--offwhite);
     cursor: pointer;
+}
 
+.arrow-month-after,
+.arrow-month-before {
+    display: flex;
+}
+
+.header__h2 {
+    color: var(--offwhite);
+    cursor: pointer;
+    padding:0 1em;
+    align-self: center;
 }
 
 .add-event-button-plus {
@@ -382,11 +396,7 @@ body {
         width: 90vw;
     }
 
-    #calendar {
-        padding: 1em;
-    }
-
-    .main__events {
+     .main__events {
         width: 90vw;
     }
 
@@ -419,6 +429,11 @@ body {
 
     .main__events {
         width: 90vw;
+    }
+
+    .header__h2 {
+        display: inline;
+        font-size: 1em;
     }
 
     .add-event-button-text {
@@ -454,6 +469,11 @@ body {
     .main__events {
         width: 90vw;
         max-width: 1024px;
+    }
+
+    .header__h2 {
+        display: inline;
+        font-size: 1em;
     }
 
     .add-event-button-text {
