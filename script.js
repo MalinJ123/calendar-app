@@ -63,6 +63,9 @@ overlayHeading.setAttribute('class', 'overlay-heading')
 overlayHeading.setAttribute('id', 'overlayHeading')
 overlayHeading.innerText = 'Torsdag 4/3'
 
+//registrera vilket datum som blir klickad
+
+
 // Spara-knapp i overlay
 const saveButton = document.createElement('button')
 saveButton.setAttribute('class', 'save-button')
@@ -316,7 +319,6 @@ function generateCalendar(month, year) {
 		let weekNumElem = document.createElement('div');
 		weekNumElem.classList.add('week-num');
 
-		console.log(`Per vecka: daycount=${dayCount}, firstDay=${firstDay}`)
 		let firstDayOfWeek = new Date(year, monthIndex, dayCount -  - firstDay)
 		weekNumElem.textContent = getWeekNumber(firstDayOfWeek);
 		
@@ -340,13 +342,21 @@ function generateCalendar(month, year) {
 			if (d === 6) {
 				day.classList.add('red')
 			}
-
-
+            day.addEventListener('click', () => {
+				let dagg = date.toLocaleString('default', {weekday: 'long'});
+				let month = date.toLocaleString('default', { month: 'long' });
+				overlayHeading.innerText = dagg + day.innerText +  month ;
+				
+				
+                console.log(dagg);
+			})
+			
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
 
 				let prevMonthDays = new Date(year, monthIndex, 0).getDate();
 				let dayNum = prevMonthDays - (firstDay - d) + 1;
+	
 				if (dayNum > 0) {
 					day.innerText = dayNum
 					let white = document.createElement('div')
@@ -380,7 +390,11 @@ function generateCalendar(month, year) {
 				dayCount++;
 
 				day.addEventListener('click', () => {
+
+					
+
 					// Tar bort den vita bakgrunden om det är en som redan är klickad
+
 					if (selectedDate) {
 						selectedDate.style.backgroundColor = '';
 						selectedDate.style.color = '';
@@ -396,6 +410,7 @@ function generateCalendar(month, year) {
 					}
 				});
 			}
+			
 		}
 		// lägg till veckorna i kalender kontainern som hämtas med dom högre upp.
 		calendarSection.appendChild(week)
