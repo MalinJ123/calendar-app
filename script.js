@@ -18,6 +18,14 @@ const headerH1 = document.createElement('h1')
 headerH1.setAttribute('class', 'header__h1')
 headerH1.innerText = 'Mars 2023'
 
+const headerH2After = document.createElement('h2')
+headerH2After.setAttribute('class', 'header__h2')
+headerH2After.innerText = 'April'
+
+const headerH2Before = document.createElement('h2')
+headerH2Before.setAttribute('class', 'header__h2')
+headerH2Before.innerText = 'Februari'
+
 
 const addEventButtonPlus = document.createElement('button')
 addEventButtonPlus.setAttribute('class', 'add-event-button-plus')
@@ -28,6 +36,14 @@ addEventButtonPlus.ariaLabel = 'Lägg till händelse'
 const AddEventButtonText = document.createElement('button')
 AddEventButtonText.setAttribute('class', 'add-event-button-text')
 AddEventButtonText.innerText = 'Lägg till'
+
+const arrowMonthBefore = document.createElement('span')
+arrowMonthBefore.setAttribute('id', 'arrowMonthBefore')
+arrowMonthBefore.setAttribute('class', 'arrow-month-before')
+
+const arrowMonthAfter = document.createElement('span')
+arrowMonthAfter.setAttribute('id', 'arrowMonthAfter')
+arrowMonthAfter.setAttribute('class', 'arrow-month-after')
 
 ////Knapp för dagens datum
 const currentDate = new Date();
@@ -48,7 +64,9 @@ toTodaysDate.addEventListener('click', () => {
     generateCalendar(currentDate.getMonth() + 1, currentDate.getFullYear());
 });
 
-header.append(headerButtonLeft, headerH1, headerButtonRight, addEventButtonPlus, AddEventButtonText)
+arrowMonthBefore.append(headerButtonLeft, headerH2Before)
+arrowMonthAfter.append(headerH2After, headerButtonRight)
+header.append(arrowMonthBefore, headerH1, arrowMonthAfter, addEventButtonPlus, AddEventButtonText)
 
 // Händelser---------
 
@@ -297,6 +315,8 @@ function generateCalendar(month, year) {
 
 	// Här lägger jag till månad och år i headerH1 som skapats tidigare.
 	headerH1.innerText = ' ' + months[monthIndex] + ' ' + year;
+	headerH2Before.innerText = months[monthIndex - 1]
+	headerH2After.innerText = months[monthIndex + 1]
 
 	let dayCount = 1;
 	let selectedDate = null; //för att bara en ska kunna bli märkt samtidigt. 
@@ -406,7 +426,7 @@ let currentMonth = new Date().getMonth() + 1;
 let currentYear = new Date().getFullYear();
 //Eventlyssnare på pilar 
 
-headerButtonLeft.addEventListener('click', () => {
+arrowMonthBefore.addEventListener('click', () => {
     while (calendarSection.firstChild) {
         calendarSection.removeChild(calendarSection.firstChild)
     }
@@ -419,7 +439,7 @@ headerButtonLeft.addEventListener('click', () => {
     generateCalendar(currentMonth, currentYear);
 })
 
-headerButtonRight.addEventListener('click', () => {
+arrowMonthAfter.addEventListener('click', () => {
     while (calendarSection.firstChild) {
         calendarSection.removeChild(calendarSection.firstChild)
     }
