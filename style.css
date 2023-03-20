@@ -148,7 +148,7 @@ body {
     margin-bottom: 10px;
     margin-left: 5vw;
     margin-right: 5vw;
-    padding: 0 1em;
+    padding: 0 1em 0 0 ;
     height: 4.5em;
 }
 
@@ -169,13 +169,24 @@ body {
      font-weight: none;
      margin-top: 3px;
      margin-left: 0.5em;
-     color: var(--darkgrey)
+     color: var(--darkgrey);
+     width: 13px; 
 }
 
 .week__days>span{
     width:40px;
     text-align: center;
 }
+
+.week-num {
+    color: var(--eventyellow);
+    width: 20px;
+    height: 40px;
+    font-size: 0.8em;
+    /* border: 2px solid hotpink; */
+
+}
+
 
 .day {
     display: flex;
@@ -216,15 +227,6 @@ body {
     border: 2px solid var(--eventyellow);
 }
 
-.week-num {
-    color: var(--eventyellow);
-    width: 20px;
-    height: 40px;
-    font-size: 0.8em;
-    border: 2px solid hotpink;
-    justify-content: flex-end;
-
-}
 
 
 
@@ -433,6 +435,7 @@ body {
     .overlay {
         width: 80vw;
     }
+
     
 }
 
@@ -474,6 +477,19 @@ body {
     .save-button {
         grid-column: 3;
     }
+   
+}
+
+@media (min-width: 800px){
+
+    .week > .week-num{
+        /* background-color: #DCE000; */
+        /* padding-left: 2em; */
+        position: relative;
+        top: 0em;
+        left: 3.8em; 
+    }
+    
 }
 
 /* desktop, larger screens */
@@ -515,3 +531,4 @@ body {
         grid-column: 3;
     }
 }
+
