@@ -342,7 +342,7 @@ function generateCalendar(month, year) {
 			if (d === 6) {
 				day.classList.add('red')
 			}
-	
+	        ///gör så att när man klickar på ett datum sen lägg till så uppdateras Headern
 			day.addEventListener('click', () => {
 				const weekdays = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'];
 				const selectedDate = new Date(year, monthIndex, day.innerText);
