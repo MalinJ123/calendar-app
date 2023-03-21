@@ -19,11 +19,11 @@ headerH1.setAttribute('class', 'header__h1')
 headerH1.innerText = 'Mars 2023'
 
 const headerH2After = document.createElement('h2')
-headerH2After.setAttribute('class', 'header__h2', 'header__h2-after')
+headerH2After.setAttribute('class', 'header-h2-after')
 headerH2After.innerText = ''
 
 const headerH2Before = document.createElement('h2')
-headerH2Before.setAttribute('class', 'header__h2', 'header__h2-before')
+headerH2Before.setAttribute('class', 'header-h2-before')
 headerH2Before.innerText = ''
 
 
