@@ -375,7 +375,7 @@ function generateCalendar(month, year) {
 				const weekdays = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'];
 				const selectedDate = new Date(year, monthIndex, day.innerText);
 				const dayOfWeek = weekdays[selectedDate.getDay()];
-				const month = selectedDate.toLocaleString('swe', { month: 'long' });
+				const month = selectedDate.toLocaleString('Swe', { month: 'long' }).charAt(0).toUpperCase() + selectedDate.toLocaleString('Swe', { month: 'long' }).slice(1);
 				overlayHeading.innerText = dayOfWeek + ' ' + day.innerText + ' ' + month;
 			});
 	
