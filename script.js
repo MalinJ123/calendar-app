@@ -342,14 +342,15 @@ function generateCalendar(month, year) {
 			if (d === 6) {
 				day.classList.add('red')
 			}
-            day.addEventListener('click', () => {
-				let dagg = date.toLocaleString('default', {weekday: 'long'});
-				let month = date.toLocaleString('default', { month: 'long' });
-				overlayHeading.innerText = dagg + day.innerText +  month ;
-				
-				
-                console.log(dagg);
-			})
+	
+			day.addEventListener('click', () => {
+				const weekdays = ['Söndag', 'Måndag', 'Tisdag', 'Onsdag', 'Torsdag', 'Fredag', 'Lördag'];
+				const selectedDate = new Date(year, monthIndex, day.innerText);
+				const dayOfWeek = weekdays[selectedDate.getDay()];
+				const month = selectedDate.toLocaleString('swe', { month: 'long' });
+				overlayHeading.innerText = dayOfWeek + ' ' + day.innerText + ' ' + month;
+			});
+	
 			
 			// här kontrollerar jag ifall den första veckan i månaden och dagens datum är den första dagen i månaden. Är det de så skapas ett tomt fält för att visa de tomma dagarna i kalendern
 			if (i === 0 && d < firstDay) {
