@@ -9,7 +9,7 @@
     --eventred: #EC6D6D;
     --eventyellow: #DCE000;
     --lightgrey: #747474;
-    --hover-red:#eb5858;
+    --hover-red:#e94848;
     --hover-yellow:#e2e601;
 }
 
@@ -137,18 +137,6 @@ body {
     margin-left: 2em;
 }
 
-.add-event-button-plus:hover{
-    color: var(--hover-red);
-    background-color: black;
-    border-radius: 50%;
-    box-shadow:  0 0  0.6em 0.3em hsl(0, 0%, 13%);
-}
-
-.add-event-button-plus:active{
-    box-shadow: 0 0 0.3em 0.1em hsl(0, 0%, 13%);
-    color:var(--faded-red);
-}
-
 
 .add-event-button-text {
     padding: 0.3em 0.8em;
@@ -165,13 +153,15 @@ body {
  .add-event-button-text:hover{
     background-color: var(--hover-red);
     border: 1px solid var(--hover-red);
-    box-shadow:  0 0  0.6em 0.3em hsl(0, 0%, 13%); 
+    box-shadow:  0 0  0.8em 0.6em hsl(0, 0%, 13%); 
+    
  }
 
 .add-event-button-text:active{
-box-shadow:  0 0  0.3em 0.1em hsl(0, 0%, 13%); 
-border: 1px solid hsl(0, 0%, 13%);
+box-shadow:  inset 0 0 0.55em 0 hsl(0, 0%, 13%); 
+border: 1px solid var(--darkgrey);
 background-color: var(--faded-red);
+color:var(--darkgrey)
 }
 /* kalender  */
 
@@ -350,13 +340,14 @@ background-color: var(--faded-red);
 .event-delete:hover{
     background-color: var(--hover-red);
     border: 1px solid var(--hover-red);
-    box-shadow: 0 0  0.6em 0.3em hsl(0, 0%, 89%); 
+    box-shadow: 0 0 0.5em 0.3em var(--faded-red); 
  }
 
 .event-delete:active{
-    box-shadow: 0 0  0.3em 0.1em hsl(0, 0%, 89%);
-border: 1px solid hsl(0, 0%, 89%);
-background-color: var(--faded-red);
+    box-shadow:  inset 0 0 0.55em 0 hsl(0, 0%, 13%); 
+    border: 1px solid var(--offwhite);
+    background-color: var(--eventred);
+    color:var(--darkgrey)
 }
 
 
@@ -402,15 +393,15 @@ background-color: var(--faded-red);
     color: var(--darkgrey);
 }
 .save-button:hover{
-    box-shadow: 0 0  0.6em 0.3em hsl(0, 0%, 89%);
+    box-shadow: 0 0  0.6em 0.3em hsl(0, 0%, 81%);
     background-color: var(--hover-yellow);
     border: 1px solid var(--hover-yellow);
 } 
 
 .save-button:active{
-    border:1px solid hsl(0, 0%, 89%);
-    box-shadow: 0 0  0.3em 0.1em hsl(0, 0%, 89%);
-    background-color: #babd00;
+    border: 1px solid var(--offwhite);
+    box-shadow: inset 0 0 0.55em hsl(61, 100%, 37%) ;
+   
 }
 
 .close-overlay-button {
