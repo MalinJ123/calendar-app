@@ -9,6 +9,8 @@
     --eventred: #EC6D6D;
     --eventyellow: #DCE000;
     --lightgrey: #747474;
+    --hover-red:#eb5858;
+    --hover-yellow:#e2e601;
 }
 
 * {
@@ -63,6 +65,17 @@ body {
     color: var(--eventyellow);
     margin-right: 1.5em;
     padding-bottom: 0.4em;
+}
+
+.to-today:hover{
+    color:var(--hover-yellow);
+    font-weight: 600;
+    
+}
+
+.to-today:active{
+    color: var(--eventyellow);
+    font-weight: 500;;
 }
 
 .header-month-container {
@@ -124,20 +137,42 @@ body {
     margin-left: 2em;
 }
 
+.add-event-button-plus:hover{
+    color: var(--hover-red);
+    background-color: black;
+    border-radius: 50%;
+    box-shadow:  0 0  0.6em 0.3em hsl(0, 0%, 13%);
+}
+
+.add-event-button-plus:active{
+    box-shadow: 0 0 0.3em 0.1em hsl(0, 0%, 13%);
+    color:var(--faded-red);
+}
+
+
 .add-event-button-text {
     padding: 0.3em 0.8em;
     border-radius: 10px;
-    border: none;
+    border: 1px solid var(--eventred);
     font-weight: 800;
     display: none;
     margin-bottom: 0.5em;
     cursor: pointer;
     background-color: var(--eventred);
     color: var(--offwhite);
-
 }
 
+ .add-event-button-text:hover{
+    background-color: var(--hover-red);
+    border: 1px solid var(--hover-red);
+    box-shadow:  0 0  0.6em 0.3em hsl(0, 0%, 13%); 
+ }
 
+.add-event-button-text:active{
+box-shadow:  0 0  0.3em 0.1em hsl(0, 0%, 13%); 
+border: 1px solid hsl(0, 0%, 13%);
+background-color: var(--faded-red);
+}
 /* kalender  */
 
 #calendar {
@@ -302,14 +337,26 @@ body {
     grid-row: 1;
     padding: 0.3em 0.8em;
     border-radius: 10px;
-    border: none;
+    border: 1px solid var(--eventred);
     width: 7em;
     font-weight: 800;
     cursor: pointer;
     background-color: var(--eventred);
-    color: var(--darkgrey);
+    color: var(--offwhite);
     justify-self: flex-end;
     margin-right: 2em;
+}
+
+.event-delete:hover{
+    background-color: var(--hover-red);
+    border: 1px solid var(--hover-red);
+    box-shadow: 0 0  0.6em 0.3em hsl(0, 0%, 89%); 
+ }
+
+.event-delete:active{
+    box-shadow: 0 0  0.3em 0.1em hsl(0, 0%, 89%);
+border: 1px solid hsl(0, 0%, 89%);
+background-color: var(--faded-red);
 }
 
 
@@ -345,13 +392,25 @@ body {
     margin-right: 1em;
     padding: 0.3em 0.8em;
     border-radius: 10px;
-    border: none;
+    border: 1px solid var(--eventyellow);
     font-weight: 800;
     width: fit-content;
     height: fit-content;
     cursor: pointer;
+    
     background-color: var(--eventyellow);
     color: var(--darkgrey);
+}
+.save-button:hover{
+    box-shadow: 0 0  0.6em 0.3em hsl(0, 0%, 89%);
+    background-color: var(--hover-yellow);
+    border: 1px solid var(--hover-yellow);
+} 
+
+.save-button:active{
+    border:1px solid hsl(0, 0%, 89%);
+    box-shadow: 0 0  0.3em 0.1em hsl(0, 0%, 89%);
+    background-color: #babd00;
 }
 
 .close-overlay-button {
