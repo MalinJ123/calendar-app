@@ -19,11 +19,11 @@ headerH1.setAttribute('class', 'header__h1')
 headerH1.innerText = 'Mars 2023'
 
 const headerH2After = document.createElement('h2')
-headerH2After.setAttribute('class', 'header__h2')
+headerH2After.setAttribute('class', 'header__h2', 'header__h2-after')
 headerH2After.innerText = ''
 
 const headerH2Before = document.createElement('h2')
-headerH2Before.setAttribute('class', 'header__h2')
+headerH2Before.setAttribute('class', 'header__h2', 'header__h2-before')
 headerH2Before.innerText = ''
 
 
@@ -79,7 +79,7 @@ overlay.setAttribute('id', 'overlay')
 const overlayHeading = document.createElement('h4')
 overlayHeading.setAttribute('class', 'overlay-heading')
 overlayHeading.setAttribute('id', 'overlayHeading')
-overlayHeading.innerText = 'Torsdag 4/3'
+overlayHeading.innerText = ''
 
 //registrera vilket datum som blir klickad
 

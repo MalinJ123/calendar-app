@@ -61,13 +61,15 @@ body {
     border: none;
     font-size: 1em;
     color: var(--eventyellow);
+    margin-right: 1.5em ;
+    padding-bottom: 0.4em;
 }
 
 .header-month-container {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    min-width: 10rem;
+    min-width: 8rem;
     max-width: 37rem;
     flex-grow: 1;
     flex-shrink: 2;
@@ -75,12 +77,8 @@ body {
 
 .header__h1 {
     font-size: 20px;
-    width:8em;
+    width:4em;
     text-align: center;
-}
-
-.header__h2 {
-   display: none;
 }
 
 .header_button_left,
@@ -100,8 +98,19 @@ body {
 .header__h2 {
     color: var(--offwhite);
     cursor: pointer;
-    padding:0 1em;
+     padding:0 1em;
     align-self: center;
+    display: none;
+    width: 114px;
+    padding-bottom: 0.4em;
+}
+.header__h2-after{
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.header__h2-before{
+    text-align: left;
 }
 
 .add-event-button-plus {
@@ -111,7 +120,7 @@ body {
     cursor: pointer;
     color: var(--eventred);
     background-color: var(--darkgrey);
-
+    margin-left: 2em;
 }
 
 .add-event-button-text {
@@ -420,6 +429,11 @@ body {
         border-radius: 15px 15px 0 0;
     }
 
+    .header__h1 {
+        width:8em;
+        text-align: center;
+    }
+
     .main__calendar {
         width: 90vw;
     }
@@ -452,6 +466,12 @@ body {
         margin-top: 2em;
         border-radius: 15px 15px 0 0;
     }
+
+    .header__h1 {
+        width:8em;
+        text-align: center;
+    }
+
 
     .main__calendar {
         width: 90vw;
@@ -505,6 +525,12 @@ body {
         margin-top: 2em;
         border-radius: 15px 15px 0 0;
     }
+
+    .header__h1 {
+        width:8em;
+        text-align: center;
+    }
+
 
     .main__calendar {
         width: 90vw;
